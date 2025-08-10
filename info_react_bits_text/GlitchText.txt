@@ -1,0 +1,18 @@
+Component: GlitchText
+Category: text\_animation / hero / interaction
+
+Visual: Big, bold wordmark with two offset “ghost” layers (red/cyan) clipping in jagged horizontal slices for a CRT‑style glitch. Scales from \~2rem up to 8rem by default.
+Behavior: Pure‑CSS pseudo‑elements (`::before`/`::after`) duplicate the text and run Tailwind keyframed `clip-path` glitches. Can run continuously or only on hover; optional colored shadows amplify the RGB split.
+
+Good for: hero headlines, promo banners, gaming/tech sections
+Avoid for: long copy, formal/corporate pages, accessibility‑critical headings without a calmer fallback
+
+Website types: creative portfolios, esports/gaming, cyberpunk/tech brands
+
+Dependencies: react, tailwindcss (with custom keyframes)
+Performance: light (CSS animations; no JS per frame)
+Mobile: yes (works), but hover-only mode won’t trigger on touch
+
+Installation: npm install -D tailwindcss postcss autoprefixer
+Usage: <GlitchText speed={1} enableShadows enableOnHover className="custom-class">React Bits</GlitchText>
+Container: No special sizing required; place on a dark background for best contrast. Ensure Tailwind config includes the provided `glitch` keyframes and `glitch-before/after` animations, and that the component’s element isn’t clipped by parent `overflow:hidden` unless intended.

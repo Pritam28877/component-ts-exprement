@@ -1,0 +1,18 @@
+Component: RotatingText
+Category: text\_animation / hero / interaction
+
+Visual: A pill/badge‑style text block where the displayed phrase swaps to the next one via per‑character slide (e.g., from 100% → 0 → −120%). Each word/char is masked by overflow for a crisp, marquee‑like flip. Size and styles come from your classes.
+Behavior: Cycles through `texts[]` automatically (or via exposed `next/previous/jumpTo/reset` ref). Splits by characters/words/lines; applies staggered Motion transitions from configurable origins (`first/last/center/random/index`). Supports spring tuning, Presence modes, and custom intervals.
+
+Good for: rotating taglines, feature highlights, testimonial snippets
+Avoid for: long paragraphs, rapidly changing UIs where constant motion distracts, SEO‑critical H1 without a static fallback
+
+Website types: SaaS/marketing pages, product launches, portfolios, event microsites
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light (DOM text + transforms/opacities; staggered animations)
+Mobile: yes (auto rotation works; no hover required)
+
+Installation: npm install motion
+Usage: \<RotatingText texts={\['React','Bits','Is','Cool!']} mainClassName="px-2 sm\:px-2 md\:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm\:py-1 md\:py-2 justify-center rounded-lg" staggerFrom="last" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '-120%' }} staggerDuration={0.025} splitLevelClassName="overflow-hidden pb-0.5 sm\:pb-1 md\:pb-1" transition={{ type: 'spring', damping: 30, stiffness: 400 }} rotationInterval={2000} />
+Container: Use an inline/flex wrapper with `overflow-hidden` on the main chip (already supported via `mainClassName`) and `overflow-hidden` on split rows (`splitLevelClassName`). Ensure sufficient line height/padding so characters can slide in/out cleanly; wrap in a relatively positioned parent if you layer other elements nearby.
