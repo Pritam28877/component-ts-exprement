@@ -1,0 +1,17 @@
+Component: FuzzyText
+Category: text\_animation/interaction
+
+Visual: A canvas-rendered word/number (e.g., “404”) that looks crisp but shimmers with subtle horizontal jitter lines; intensity increases on hover. Scales with assigned font size (defaults to clamp(2rem, 8vw, 8rem)).
+Behavior: Renders text to an offscreen canvas, then scans and re-draws row-by-row with small per-line horizontal offsets on each rAF tick; hover inside the text bounds switches from baseIntensity to hoverIntensity.
+
+Good for: error/404 sections, edgy hero headlines, glitch/retro aesthetics
+Avoid for: body copy, accessibility-critical headings, low-contrast themes
+Website types: creative portfolios, game/entertainment, experimental marketing
+
+Dependencies: react, HTML Canvas API (uses document.fonts when available)
+Performance: medium (continuous rAF redraw across text height)
+Mobile: yes (touch hover region supported; passive false on touchmove)
+
+Installation: None
+Usage: <FuzzyText baseIntensity={0.2} hoverIntensity={0.5} enableHover={true}>404</FuzzyText>
+Container: The component is a <canvas>; give it space via parent layout (e.g., center with flex/grid). It auto-sizes to text; adjust overall size with the `fontSize` prop or scale via CSS (e.g., max-width). Ensure high contrast background for visibility and avoid overlaying heavy filters that could blur the effect.

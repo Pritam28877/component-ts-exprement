@@ -1,0 +1,17 @@
+Component: SplitText
+Category: text\_animation/hero
+
+Visual: Animated headline or sentence where characters/words/lines appear within their text box; typical heading size (e.g., h1–h3), inline-block with overflow-hidden to mask motion.
+Behavior: Splits text into chars/words/lines and animates each from {opacity:0, y:40} to {opacity:1, y:0} with stagger; triggers once on scroll into view (ScrollTrigger) using threshold/rootMargin; fires onLetterAnimationComplete when the timeline finishes.
+
+Good for: hero headlines, section titles, key callouts
+Avoid for: long paragraphs, dense body copy, rapidly changing live text
+Website types: marketing/landing pages, SaaS product sites, portfolios
+
+Dependencies: react, gsap, gsap/ScrollTrigger, gsap/SplitText
+Performance: light–medium (staggered transforms/opacity on multiple nodes)
+Mobile: yes (scroll-triggered, touch-safe)
+
+Installation: npm install gsap
+Usage: \<SplitText text="Hello, GSAP!" className="text-2xl font-semibold text-center" delay={100} duration={0.6} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-100px" textAlign="center" onLetterAnimationComplete={() => console.log('All letters have animated!')} />
+Container: Inline-block text element with overflow-hidden; parent can be any layout, but ensure sufficient viewport space for ScrollTrigger (e.g., not inside overflow-hidden ancestors that clip scroll); for splitType="lines", the element becomes position\:relative to support absolute line wrapping.

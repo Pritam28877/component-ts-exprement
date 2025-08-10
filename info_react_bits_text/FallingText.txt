@@ -1,0 +1,18 @@
+Component: FallingText
+Category: text\_animation / interaction / hero
+
+Visual: Normal inline sentence/heading that suddenly detaches into individual word blocks and falls under physics inside its container. Words tumble, bounce on floor/walls, and can be dragged. Size follows your fontSize; canvas sits behind the words.
+Behavior: On trigger (auto/scroll/click/hover) each word becomes a Matter.js body with gravity, restitution, angular velocity; mouse constraint allows grabbing and flinging; optional wireframes show physics bodies.
+
+Good for: hero headline reveals, announcement strips, playful section headers
+Avoid for: long paragraphs, mission‑critical headings that must stay static, dense pages where overlap hurts readability
+
+Website types: creative studios, events/launch microsites, edu/experiments, gaming/e‑sports
+
+Dependencies: react, matter-js (and @types/matter-js for TS)
+Performance: medium (physics sim + DOM sync; scales with word count)
+Mobile: yes (tap/drag works), but keep word count low and fontSize moderate
+
+Installation: npm install matter-js && npm install -D @types/matter-js
+Usage: \<FallingText text="Make ideas tangible with physics" highlightWords={\["tangible"]} trigger="scroll" backgroundColor="transparent" wireframes={false} gravity={1} mouseConstraintStiffness={0.2} fontSize="2rem" />
+Container: Must have explicit width/height and position context (e.g., className="relative w-full h-\[300px] overflow-hidden"). The component absolutely positions each word; ensure no parent transforms interfere. In Next.js, render client-side only (e.g., dynamic import with ssr\:false).

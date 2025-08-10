@@ -1,0 +1,18 @@
+Component: TextCursor
+Category: text\_animation / interaction
+
+Visual: A trail of repeating text/emoji follows the cursor, leaving evenly spaced, semi-floating copies that fade/scale out. Each copy can gently drift/rotate for a lively, airy feel. Size matches your text styles (e.g., 24–48px).
+Behavior: On mouse move, new trail items spawn at fixed spacing; items auto-remove on inactivity. Optional orientation toward movement, subtle oscillation (x/y/rotate), and timed fade/scale exits.
+
+Good for: playful hero overlays, cursor flair on landing sections, interactive banners
+Avoid for: dense text areas, forms/data tables, accessibility-critical copy where duplication is distracting
+
+Website types: creative portfolios, agencies, events/microsites, gaming/e-sports
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light (DOM + CSS transforms; scales with `maxPoints`)
+Mobile: yes (works on touch via container-relative moves, but effect is minimal without a cursor)
+
+Installation: npm install motion
+Usage: <TextCursor text="Hello!" delay={0.01} spacing={80} followMouseDirection randomFloat exitDuration={0.3} removalInterval={20} maxPoints={10} />
+Container: A relatively positioned wrapper with explicit size (e.g., className="relative w-full h-\[300px] overflow-hidden"). The component renders absolutely positioned trail items inside; keep `pointer-events: none` on the overlay to avoid blocking UI.

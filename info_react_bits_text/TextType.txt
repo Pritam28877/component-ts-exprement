@@ -1,0 +1,17 @@
+Component: TextType
+Category: text\_animation
+
+Visual: Single-line (or wrapping) inline text that “types” character-by-character with an optional blinking cursor; auto-fits content width and inherits parent typography.
+Behavior: Types each string with configurable speed (supports variable per-char speed), pauses, optionally deletes, then cycles to next; can start only when visible (IntersectionObserver), supports reverse typing order, per-sentence color cycling, loop/non-loop; cursor can blink, hide while typing, and be customized.
+
+Good for: hero rotating phrases, section intros/taglines, feature callouts
+Avoid for: long paragraphs, critical instructional text, form labels/inputs
+Website types: SaaS marketing, portfolios/creative, landing pages
+
+Dependencies: react, gsap (for cursor blink), TextType.css
+Performance: light
+Mobile: yes
+
+Installation: npm install gsap
+Usage: \<TextType text={\["Text typing effect", "for your websites", "Happy coding!"]} typingSpeed={75} pauseDuration={1500} showCursor={true} cursorCharacter="|" className="text-2xl" />
+Container: Place in a block with stable line-height to minimize layout shift; keep sufficient width to avoid excessive wrapping; avoid heavy parent transforms/filters; works as any element via `as` prop (e.g., h1, p, div).

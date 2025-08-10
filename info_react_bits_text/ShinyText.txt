@@ -1,0 +1,17 @@
+Component: ShinyText
+Category: text\_animation
+
+Visual: Inline text with a semi-transparent silver/gray base color and a diagonal light-reflection effect sweeping across it, creating a “shimmer” or “shine” look. Size depends on the applied font size.
+Behavior: Uses a CSS gradient background clipped to text; an animated keyframe moves the gradient from right to left on an infinite loop. Speed is adjustable via `speed` prop; can be disabled entirely.
+
+Good for: hero headings, promotional banners, call-to-action text
+Avoid for: long paragraphs, body copy, accessibility-critical text (reduced readability)
+Website types: ecommerce, portfolios/creative, event/marketing pages
+
+Dependencies: tailwindcss (with custom keyframes/animation config)
+Performance: light
+Mobile: yes
+
+Installation: None (requires Tailwind CSS with custom `shine` animation in config)
+Usage: <ShinyText text="Just some shiny text!" disabled={false} speed={3} className="custom-class" />
+Container: Inline-block element; inherits font styling from parent; ensure background contrast so the shine effect is visible; avoid wrapping in containers with overflow hidden unless intentional to crop the shine.

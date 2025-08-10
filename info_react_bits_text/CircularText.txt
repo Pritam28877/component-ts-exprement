@@ -1,0 +1,17 @@
+Component: CircularText
+Category: text\_animation/interaction
+
+Visual: A 200×200px circular badge with characters arranged around the ring (bold, centered, white by default). Each letter is positioned radially to form a rotating text wheel.
+Behavior: Auto-spins continuously using linear tween; on hover you can slowDown, speedUp, pause, or goBonkers (very fast + slight scale). Spin resumes to baseline on mouse leave.
+
+Good for: hero seals/badges, CTA ornaments, logo locks
+Avoid for: long sentences, dense content blocks, accessibility-critical primary headings
+Website types: creative portfolios, SaaS marketing, event/brand sites
+
+Dependencies: react, motion (motion/react)
+Performance: light–medium (many absolutely positioned spans + continuous rotation)
+Mobile: yes (hover effects won’t trigger; spin runs at baseline)
+
+Installation: npm install motion
+Usage: <CircularText text="REACT*BITS*COMPONENTS*" onHover="speedUp" spinDuration={20} className="custom-class" />
+Container: The component renders a relative, rounded, 200×200 container; keep it square for symmetry. Ensure enough padding/contrast around it; avoid heavy parent transforms that may jitter continuous rotation.

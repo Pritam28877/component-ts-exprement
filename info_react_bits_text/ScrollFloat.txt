@@ -1,0 +1,18 @@
+Component: ScrollFloat
+Category: text\_animation / hero / interaction
+
+Visual: Headline/text where each character rises from below with a soft stretch-and-snap (scaleY>1, scaleX<1), fading in as you scroll. Reads like a buoyant letter-by-letter float-in. Size uses clamp(1.6rem, 4vw, 3rem) by default.
+Behavior: Splits text into characters and animates them with GSAP as the element enters the viewport; scrub ties progress to scroll. Controls: duration, ease, stagger, custom scroll start/end, optional custom scroller via ref.
+
+Good for: hero headlines, section intros, feature callouts
+Avoid for: long paragraphs, marquee text already in motion, very dense pages where per-char animation is distracting
+
+Website types: product/marketing pages, creative portfolios, SaaS landers
+
+Dependencies: react, gsap, gsap/ScrollTrigger
+Performance: light (per‑char transforms/opacities; scrubbed scrolltrigger)
+Mobile: yes (works on touch scroll; consider larger stagger/duration for readability)
+
+Installation: npm install gsap
+Usage: <ScrollFloat animationDuration={1} ease="back.inOut(2)" scrollStart="center bottom+=50%" scrollEnd="bottom bottom-=40%" stagger={0.03}>React Bits</ScrollFloat>
+Container: Use a block wrapper with overflow-hidden (component adds it) and enough vertical space for the yPercent entry; for custom scroll containers, pass scrollContainerRef pointing to the scrollable element.

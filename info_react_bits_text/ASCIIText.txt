@@ -1,0 +1,18 @@
+Component: ASCIIText
+Category: text\_animation / hero / background
+
+Visual: 3D mono-text rendered on a plane and converted to colorful ASCII art that fills the container. Characters shimmer with subtle RGB offset; optional sine‑wave warps give the text a liquid, holographic feel.
+Behavior: Three.js renders a text texture on a plane; a shader adds time-based waves; mouse/touch tilts the plane; a custom post-process samples the canvas into ASCII characters (`<pre>`) and hue-rotates based on cursor angle.
+
+Good for: hero banners, experimental headings, event/launch splashes
+Avoid for: body copy, SEO‑critical headings without a plain fallback, low-power pages where GPU load matters
+
+Website types: creative portfolios, code/art labs, gaming/e‑sports, music/festival microsites
+
+Dependencies: react, three
+Performance: medium‑heavy (WebGL + ASCII post-process each frame; scales with container size and `asciiFontSize`)
+Mobile: yes (touch tilt works), but consider smaller text/plane heights and lower frame budgets on mid/low-end devices
+
+Installation: npm install three
+Usage: <ASCIIText text="hello_world" asciiFontSize={8} textFontSize={200} textColor="#fdf9f3" planeBaseHeight={8} enableWaves />
+Container: Place inside a sized parent (e.g., className="relative w-full h-\[400px]")—component uses an absolutely positioned canvas/pre overlay that fills 100%. Client-side only (disable SSR or dynamic import) and consider an accessible text fallback (e.g., visually hidden heading).

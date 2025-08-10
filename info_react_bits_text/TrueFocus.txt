@@ -1,0 +1,19 @@
+Component: TrueFocus
+Category: text\_animation / interaction / hero
+
+Visual: A bold multi‑word headline where only one word is crisp while the others are softly blurred. A neon‑style focus frame (corner brackets) glides to the active word, creating a “spotlight” effect. Size follows your text styles (e.g., 2–4rem).
+
+Behavior: Cycles focus across words automatically (timed by `animationDuration` + `pauseBetweenAnimations`) or switches on hover in `manualMode`. The active word is unblurred; others animate to `blurAmount`. The focus frame smoothly animates (via Motion) to the active word’s bounding box.
+
+Good for: hero headlines, feature lists/tags, narrative intros
+Avoid for: long paragraphs/body copy, small text, places where blur hurts readability (e.g., legal text)
+
+Website types: creative agencies, product/feature marketing, portfolios, editorial/landing pages
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light (DOM + CSS filters + a single Motion element)
+Mobile: yes (auto mode works well; hover interactions won’t apply on touch)
+
+Installation: npm install motion
+Usage: <TrueFocus sentence="True Focus" manualMode={false} blurAmount={5} borderColor="red" glowColor="rgba(255,0,0,0.6)" animationDuration={2} pauseBetweenAnimations={1} />
+Container: A relatively positioned wrapper (e.g., className="relative flex flex-wrap items-center justify-center gap-4"). Ensure ample line height and font size for clean blur edges; the Motion focus frame is absolutely positioned inside the container.

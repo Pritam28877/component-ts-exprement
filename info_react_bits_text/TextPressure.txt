@@ -1,0 +1,17 @@
+Component: TextPressure
+Category: text\_animation/interaction
+
+Visual: Big uppercase headline that reacts per-letter to the pointer: letters near the cursor look wider/heavier/italicized (or outlined if stroke is on). Size auto-computes from container width with a minimum font size.
+Behavior: On every frame, measures the cursor distance to each glyph and adjusts variable-font axes (`wght`, `wdth`, `ital`) plus optional opacity (“alpha”) and SVG-like outline via CSS text-stroke. Can optionally scale vertically to fit container height.
+
+Good for: hero headlines, interactive mastheads, brand showcases
+Avoid for: body text, accessibility-critical copy, non-variable fonts
+Website types: creative studios, event/microsites, experimental SaaS marketing
+
+Dependencies: React; a variable font that supports 'wght'/'wdth'/'ital' axes (e.g., Compressa VF); optional Tailwind for utility classes
+Performance: medium–heavy (per-letter rAF updates + layout reads; keep text short)
+Mobile: yes (touch-follow supported)
+
+Installation: None
+Usage: <TextPressure text="Hello!" flex={true} alpha={false} stroke={false} width={true} weight={true} italic={true} textColor="#ffffff" strokeColor="#ff0000" minFontSize={36} />
+Container: Place inside a relatively positioned container with explicit height (e.g., style={{ position:'relative', height:'300px' }}). Component fills width/height; avoid very long strings; ensure the loaded font URL is reachable and the chosen font family exposes the required variable axes.

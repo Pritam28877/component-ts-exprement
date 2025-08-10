@@ -1,0 +1,17 @@
+Component: GradientText
+Category: text\_animation
+
+Visual: Animated multi-color gradient text with optional glowing gradient border; inline/fit-content by default (max-w-fit), scales with parent font size
+Behavior: Background gradient pans left-to-right in a loop; when showBorder is true, an animated gradient border runs behind the text with a subtle blur
+
+Good for: hero, headings, call\_to\_action
+Avoid for: long\_paragraphs, dense\_tables, legal\_text
+Website types: creative\_portfolios, SaaS\_landing\_pages, eCommerce\_feature\_sections
+
+Dependencies: react, tailwindcss (with custom keyframes/animation from snippet)
+Performance: light
+Mobile: yes
+
+Installation: npx tailwindcss init -p (if Tailwind not set up); otherwise none
+Usage: \<GradientText colors={\["#40ffaa","#4079ff","#40ffaa","#4079ff","#40ffaa"]} animationSpeed={3} showBorder={false} className="custom-class">Add a splash of color!</GradientText>
+Container: Works inline or in flex containers; inherits font-size/weight from parent; ensure Tailwind has keyframes `gradient` and animation `gradient` defined; no special width/height needed (max-w-fit already applied)

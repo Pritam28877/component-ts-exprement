@@ -1,0 +1,18 @@
+Component: ScrollReveal
+Category: text\_animation / hero / interaction
+
+Visual: A paragraph/quote enters with a gentle page‑tilt that straightens as you scroll; each word fades in from low opacity and optionally de‑blurs from a soft blur. Large, readable, headline‑like text by default (clamp(1.6rem, 4vw, 3rem)).
+Behavior: Splits content into words; scroll‑scrub ties progress to viewport. Container un‑rotates from `baseRotation` to 0 while words ramp opacity from `baseOpacity` to 1 (and blur → sharp if enabled). Staggered reveal for smooth cadence; supports custom start/end points and custom scroller ref.
+
+Good for: hero quotes, section intros, storytelling blocks
+Avoid for: very long body text, motion‑sensitive pages, dense data tables
+
+Website types: marketing/landing pages, editorial features, portfolios
+
+Dependencies: react, gsap, gsap/ScrollTrigger
+Performance: light (per‑word opacity/filter, one container rotate; scrubbed)
+Mobile: yes (scroll‑based; tune blur/opacity for clarity on small screens)
+
+Installation: npm install gsap
+Usage: <ScrollReveal baseOpacity={0} enableBlur baseRotation={5} blurStrength={10} rotationEnd="bottom bottom" wordAnimationEnd="bottom bottom">Your text…</ScrollReveal>
+Container: Place inside a block wrapper with sufficient vertical space; component handles word splitting and ScrollTrigger setup. For custom scroll areas, pass `scrollContainerRef` to the scrollable element.

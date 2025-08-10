@@ -1,0 +1,18 @@
+Component: DecryptedText
+Category: text\_animation / hero / interaction
+
+Visual: A line of text that appears scrambled with random characters, progressively revealing the real text from start, end, or center. Can be styled so unrevealed characters look encrypted. Size matches normal text but stands out due to animation.
+Behavior: On hover or when scrolled into view, characters shuffle at set intervals, revealing the intended text in a configurable sequence. Supports custom character sets, reveal speeds, and one-time or repeated animations.
+
+Good for: hero headlines, section intros, call-to-action emphasis
+Avoid for: body paragraphs, accessibility-critical content without a visible fallback, dense text blocks
+
+Website types: tech startups, cybersecurity, creative portfolios, gaming/e-sports
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light (string manipulation + simple DOM updates)
+Mobile: yes (works with touch for view-triggered animation; hover triggers won’t work on touch devices)
+
+Installation: npm install motion
+Usage: <DecryptedText text="Hover me!" speed={100} maxIterations={20} characters="ABCD1234!?" className="revealed" parentClassName="all-letters" encryptedClassName="encrypted" animateOn="view" revealDirection="center" />
+Container: Inline by default; wrap in block or flex containers for positioning. Ensure sufficient contrast between encrypted and revealed styles for clarity.
