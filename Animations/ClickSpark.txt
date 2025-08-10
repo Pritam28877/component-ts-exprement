@@ -1,0 +1,17 @@
+Component: ClickSpark
+Category: interaction
+
+Visual: A subtle, burst-like click effect—short radial strokes emanate from the click/tap point over your content. Fills the parent area via an invisible canvas overlay.
+Behavior: On click, draws `sparkCount` line “sparks” expanding outward with easing; each spark shortens and fades by stroke length over `duration` before clearing.
+
+Good for: buttons/CTAs feedback, gallery thumbnails, playful card interactions
+Avoid for: dense tables/forms (noise), critical performance zones, dark-mode pages where white sparks may clash (unless recolored)
+Website types: creative/portfolio, e‑commerce, marketing sites
+
+Dependencies: react (uses Canvas 2D + ResizeObserver)
+Performance: light (single canvas, per-frame draw; scales with sparkCount)
+Mobile: yes (tap works; uses click handler)
+
+Installation: None
+Usage: <ClickSpark sparkColor="#fff" sparkSize={10} sparkRadius={15} sparkCount={8} duration={400} easing="ease-out" extraScale={1.0}>…</ClickSpark>
+Container: Wrap your interactive region; parent should have concrete size (component sets `position: relative` / `absolute` canvas). Avoid pointer events on the canvas (already disabled). For large areas, consider lowering `sparkCount` or `duration`; add a `prefers-reduced-motion` gate if needed.

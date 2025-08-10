@@ -1,0 +1,17 @@
+Component: FadeContent
+Category: interaction
+
+Visual: Wraps any child; starts transparent (and optionally blurred) and transitions to fully visible (and sharp). Size matches its child content.
+Behavior: One-time fade-in on entering viewport via IntersectionObserver; optional blur(10px→0) animated alongside opacity with configurable duration, easing, delay, and threshold.
+
+Good for: hero sub-elements, section headers/intro copy, feature cards
+Avoid for: primary navbar and above-the-fold LCP elements, critical form fields, large full-bleed images (with blur enabled)
+Website types: SaaS/tech, blogs/media, e‑commerce, portfolios
+
+Dependencies: react (built-in IntersectionObserver API)
+Performance: light (blur on large elements: medium)
+Mobile: yes
+
+Installation: None
+Usage: <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0} threshold={0.15} delay={100}>…</FadeContent>
+Container: No special layout needed; avoid ancestor styles that force extra paints (e.g., heavy backdrop-filters). For smoother rendering add `will-change: opacity, filter` on the child; ensure the element can actually intersect (not display\:none).

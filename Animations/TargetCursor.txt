@@ -1,0 +1,17 @@
+Component: TargetCursor
+Category: interaction
+
+Visual: A custom crosshair-style cursor: a tiny center dot with four bracket corners orbiting/spinning subtly around the pointer. Sits above the page as a fixed overlay.
+Behavior: Follows the mouse with eased motion; continuously spins. When hovering elements matching `targetSelector` (default `.cursor-target`), the corners snap to outline the target with slight parallax. Clicks briefly scale the dot/cursor. Optionally hides the native cursor.
+
+Good for: interactive landing pages, product/portfolio galleries, game-like UIs
+Avoid for: form-heavy flows and text inputs, dense enterprise tables (cursor precision), accessibility-critical areas (screen readers/low-vision)
+Website types: creative/portfolio, entertainment, experimental SaaS marketing
+
+Dependencies: react, gsap
+Performance: medium (global mouse listeners + GSAP timelines; fine for few targets)
+Mobile: no (mouse-only; add touch handlers if needed)
+
+Installation: npm install gsap
+Usage: <TargetCursor targetSelector=".cursor-target" spinDuration={2} hideDefaultCursor />
+Container: Component renders a full-viewport fixed overlay (`pointer-events: none`, very high z-index). Ensure target elements have the `.cursor-target` class (or your selector). Avoid iframes and canvas regions you need to interact with above it. Consider `mix-blend-difference` contrast (light/dark backgrounds) and add a fallback for `prefers-reduced-motion`.

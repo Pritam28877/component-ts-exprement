@@ -1,0 +1,17 @@
+Component: PixelTransition
+Category: interaction
+
+Visual: A card-sized container (default 300px wide) showing one piece of content that transitions to another via a randomized pixelation effect. The grid of pixels briefly covers the content before revealing the alternate state.
+Behavior: On hover (desktop) or tap (mobile), a grid of colored "pixels" animates in random sequence, hiding the current content and revealing the alternate. Can toggle back and forth; uses GSAP staggered animations for pixel reveal/hide.
+
+Good for: product cards, portfolio item previews, interactive gallery thumbnails
+Avoid for: primary navigation items, large hero banners (performance-heavy), critical above-the-fold elements with high LCP sensitivity
+Website types: creative portfolios, e-commerce, entertainment/media
+
+Dependencies: react, gsap
+Performance: medium-heavy (depends on grid size; many DOM nodes for high grids)
+Mobile: yes (click/tap toggles instead of hover)
+
+Installation: npm install gsap
+Usage: `<PixelTransition firstContent={<img ... />} secondContent={<div>...</div>} gridSize={12} pixelColor="#fff" animationStepDuration={0.4} />`
+Container: Must have fixed aspect ratio (provided via `aspectRatio` prop) and `overflow:hidden`; avoid wrapping in elements that disrupt relative positioning; size content with `width` and `max-width` as desired.
