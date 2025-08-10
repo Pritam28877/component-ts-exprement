@@ -1,0 +1,17 @@
+Component: Noise
+Category: background/hero/interaction
+
+Visual: Full‑screen, subtle film‑grain layer (black/white speckles) that sits over content; reads as fine texture. Covers the entire viewport by default (stretches to parent if constrained).
+Behavior: A canvas regenerates random grayscale pixels each frame interval; opacity controls grain strength. (Note: current code mainly uses `patternRefreshInterval` and `patternAlpha`; scale/size props are present but not actively applied to rendering density.)
+
+Good for: hero backdrops, section separators, minimal pages needing texture
+Avoid for: text‑heavy forms, data tables, image galleries that need perfect clarity
+Website types: creative portfolios, editorial/fashion, minimalist SaaS/landing pages
+
+Dependencies: none
+Performance: light (very small per‑frame work; increase interval for ultra‑low CPU)
+Mobile: yes
+
+Installation: None
+Usage: `<Noise patternSize={250} patternScaleX={1} patternScaleY={1} patternRefreshInterval={2} patternAlpha={15} />`
+Container: The component renders an absolutely positioned, pointer‑events‑none canvas sized to the viewport (`h-screen w-screen`). Place inside a relatively positioned wrapper if you want it clipped to that area; otherwise it will cover the full screen. Adjust z-index if you need content above it.

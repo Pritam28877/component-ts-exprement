@@ -1,0 +1,18 @@
+Component: Ribbons
+Category: background
+
+Visual: Multiple soft “ribbon” trails with variable thickness, drawn in WebGL; fills the container, feels airy and fluid.
+Behavior: Ribbons follow pointer/touch with spring + friction; segments lerp over time. Optional shader adds subtle sine-wave wobble; optional end-fade along ribbon length.
+
+Good for: hero, background flourishes behind headings, interactive landing sections
+Avoid for: dense data tables, long-form article bodies, critical CTA-only pages where motion may distract
+Website types: creative/agency, tech/SaaS, gaming/entertainment
+
+Dependencies: ogl (Renderer, Transform, Vec3, Color, Polyline)
+Performance: medium (GPU/WebGL; fine on modern devices, keep pointCount/colors modest)
+Mobile: yes (touch-supported; consider reducing pointCount/thickness for low-end devices)
+
+Installation: npm install ogl
+Usage: \<Ribbons baseThickness={30} colors={\['#ffffff']} speedMultiplier={0.5} maxAge={500} enableFade={false} enableShaderEffect={true} />
+
+Container: A relatively positioned block with explicit height; canvas is absolutely positioned to cover it. Recommended: style={{ height: '500px', position: 'relative', overflow: 'hidden' }}.

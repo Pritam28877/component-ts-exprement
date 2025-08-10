@@ -1,0 +1,17 @@
+Component: ShapeBlur
+Category: background/hero/interaction
+
+Visual: A soft, translucent geometric shape (rounded square, circle, stroked shape, or polygon depending on `variation`) that follows the mouse with a blurred/faded edge; rendered via WebGL on a transparent background to overlay content. Size and roundness are adjustable, with optional border and inner circle effects.
+Behavior: Listens to mouse movement, smoothly interpolates position (damping), and renders a dynamic signed-distance-field shape mask in a shader. Shape style is chosen by `variation` and influenced by size, border, and edge parameters.
+
+Good for: hero headers, background overlays, interactive brand visuals
+Avoid for: static minimalist designs, dense form sections, pages where GPU effects are undesirable
+Website types: creative portfolios, tech startups, design agencies
+
+Dependencies: three
+Performance: medium (WebGL with continuous animation and mouse tracking)
+Mobile: yes (but effect is pointer-driven; touch devices get less benefit unless adapted)
+
+Installation: npm install three
+Usage: `<ShapeBlur variation={0} pixelRatioProp={window.devicePixelRatio || 1} shapeSize={0.5} roundness={0.5} borderSize={0.05} circleSize={0.5} circleEdge={1} />`
+Container: Place inside a relatively positioned wrapper with explicit width/height (e.g., `position: relative; height: 500px; overflow: hidden`). The effect will fill its container; ensure the container is large enough for the intended shape motion.

@@ -1,0 +1,17 @@
+Component: ImageTrail
+Category: interaction/gallery/hero
+
+Visual: A series of images that appear and animate in sequence along the cursor or touch path, each trailing and fading out with a unique motion style depending on the chosen `variant` (e.g., scaling, rotation, blur, perspective, multi-image layering). Each image is styled as a rounded rectangle card.
+Behavior: Listens to pointer movement within the container, spawns images from the provided `items` array at set distance thresholds, animates them with GSAP (position, scale, opacity, rotation, filters), and removes them after completion. Supports 8 pre-defined animation variants for different visual effects.
+
+Good for: hero sections, interactive showcases, portfolio previews
+Avoid for: static minimalist designs, form-heavy interfaces, performance-sensitive dashboards
+Website types: creative agencies, fashion/e-commerce, art/photography portfolios
+
+Dependencies: gsap
+Performance: medium–heavy (depends on variant complexity and image count)
+Mobile: yes (touch events supported; high animation load may affect low-end devices)
+
+Installation: npm install gsap
+Usage: `<ImageTrail items={['img1.jpg','img2.jpg']} variant={3} />`
+Container: Must be inside a relatively positioned element with fixed height and `overflow: hidden` (or `overflow: visible` for animations exceeding bounds). Each image is absolutely positioned and sized at \~190px wide by default; adjust styles as needed for larger or smaller trails.
