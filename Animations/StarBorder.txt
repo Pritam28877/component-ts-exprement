@@ -1,0 +1,17 @@
+Component: StarBorder
+Category: interaction
+
+Visual: A rounded button/card with a subtle starry glow that sweeps along the top and bottom edges, creating a luminous animated border around the content.
+Behavior: Two radial-gradient “star bands” slide in opposite directions (CSS keyframes). Speed and color are configurable; thickness controls the apparent border width.
+
+Good for: hero CTAs, feature cards, pricing toggles
+Avoid for: dense forms/tables, ultra-minimalist layouts, motion-sensitive areas without a toggle
+Website types: creative/agency, SaaS marketing, portfolios
+
+Dependencies: React, Tailwind CSS (custom keyframes). GSAP not required.
+Performance: light (pure CSS animations)
+Mobile: yes
+
+Installation: npm install tailwindcss postcss autoprefixer
+Usage: <StarBorder as="button" className="custom-class" color="cyan" speed="5s" thickness={1}>Buy now</StarBorder>
+Container: Renders as an inline-block, position: relative, overflow-hidden, rounded container. Ensure Tailwind has the provided keyframes (`star-movement-top`/`bottom`) and apply a visible background behind the animated bands (component includes a default dark gradient—you can override via className).

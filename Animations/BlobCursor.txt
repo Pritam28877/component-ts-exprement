@@ -1,0 +1,17 @@
+Component: BlobCursor
+Category: interaction/background
+
+Visual: Soft, glowing blobs (circle or square) that trail the cursor; each blob has a smaller inner “highlight” and optional gooey/blur filter. Sits on top of content.
+Behavior: Lead blob snaps to pointer (fast tween), followers ease-in (slower tween) creating a trailing effect. Mouse and touch supported; optional SVG filter for metaball-like merging/glow.
+
+Good for: hero overlays, playful landing pages, feature sections with minimal inputs
+Avoid for: form-heavy pages, dense tables/dashboards, strict-accessibility areas without a motion toggle
+Website types: creative/agency, SaaS marketing, portfolios
+
+Dependencies: react, gsap
+Performance: light–medium (DOM + GSAP tweens; SVG filter increases cost)
+Mobile: yes (touch move supported)
+
+Installation: npm install gsap
+Usage: <BlobCursor blobType="circle" fillColor="#5227FF" trailCount={3} sizes={[60,125,75]} innerSizes={[20,35,25]} innerColor="rgba(255,255,255,0.8)" opacities={[0.6,0.6,0.6]} shadowColor="rgba(0,0,0,0.75)" shadowBlur={5} shadowOffsetX={10} shadowOffsetY={10} filterStdDeviation={30} useFilter={true} fastDuration={0.1} slowDuration={0.5} zIndex={100} />
+Container: A relatively positioned wrapper that covers the intended area (e.g., class="relative w-full h-full"). The drawable layer is pointer-events: none, so underlying UI remains clickable. For full-page overlays, mount inside a full-viewport container and set a high z-index; reduce filterStdDeviation/disable useFilter on low-end devices.

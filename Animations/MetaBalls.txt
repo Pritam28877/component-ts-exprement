@@ -1,0 +1,17 @@
+Component: MetaBalls
+Category: background/interaction
+
+Visual: Soft, blobby “metaball” blobs that merge/split fluidly; fills its container. Optional transparent background so blobs sit over page content.
+Behavior: GPU fragment-shader field blending; N moving balls (plus a cursor-driven ball) orbit and clump based on `clumpFactor`; cursor ball smoothly follows pointer with `hoverSmoothness`.
+
+Good for: hero backdrops, feature sections, playful landing backgrounds
+Avoid for: text-heavy article bodies, strict-accessibility pages, performance-critical dashboards
+Website types: creative/agency, SaaS marketing, portfolios
+
+Dependencies: ogl (Renderer, Program, Mesh, Triangle, Transform, Vec3, Camera)
+Performance: medium (single full-screen shader; tune `ballCount`, `animationSize`, `dpr`)
+Mobile: yes (pointer/touch via pointer events; consider fewer balls and lower `animationSize`)
+
+Installation: npm install ogl
+Usage: <MetaBalls color="#ffffff" cursorBallColor="#ffffff" cursorBallSize={2} ballCount={15} animationSize={30} enableMouseInteraction={true} enableTransparency={true} hoverSmoothness={0.05} clumpFactor={1} speed={0.3} />
+Container: A relative, explicitly sized wrapper; canvas auto-fills. Example: class="relative w-full h-\[500px] overflow-hidden". For full-screen, use fixed/absolute with 100vw × 100vh and lower `ballCount` on low-end devices.

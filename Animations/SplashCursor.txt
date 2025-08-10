@@ -1,0 +1,17 @@
+Component: SplashCursor
+Category: interaction/background
+
+Visual: Full-screen, glassy fluid ink trails that bloom around the cursor/touch; sits as a transparent overlay on top of the page.
+Behavior: Real-time 2D fluid simulation (advection, vorticity, pressure solve). Trails “splat” on pointer movement/clicks, diffuse and swirl, with optional shading and auto color cycling.
+
+Good for: hero overlays, landing backgrounds, playful cursor effects
+Avoid for: dense forms/tables, performance-critical dashboards, WCAG-strict content areas without a toggle
+Website types: creative/agency, gaming/entertainment, experimental SaaS/portfolio
+
+Dependencies: none (raw WebGL; no external libs required)
+Performance: heavy (fluid sim on GPU; tune resolutions/dissipation for low-end devices)
+Mobile: yes (touch supported; lower resolutions recommended)
+
+Installation: none
+Usage: <SplashCursor SHADING={true} TRANSPARENT={true} DYE_RESOLUTION={1440} SPLAT_FORCE={6000} COLOR_UPDATE_SPEED={10} />
+Container: Fixed, full-viewport overlay with pointer pass-through. Use a top-level wrapper like: class="fixed top-0 left-0 z-50 pointer-events-none w-full h-full"; canvas sized to 100vw × 100vh. Adjust SIM\_RESOLUTION/DYE\_RESOLUTION down for weaker GPUs.
