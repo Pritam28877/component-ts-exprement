@@ -1,0 +1,17 @@
+Component: LetterGlitch
+Category: background
+
+Visual: Dense grid of mono-spaced letters/symbols on a dark canvas; subtle radial vignettes optional; scales to fill its container
+Behavior: Random “glitch” swaps of characters and colors at a set interval; optional smooth color interpolation; responsive resize; purely canvas-based
+
+Good for: hero backdrops, 404/maintenance screens, section dividers
+Avoid for: text-heavy body content behind readable text, forms, data tables
+Website types: tech SaaS, cybersecurity/infosec, gaming/esports
+
+Dependencies: react (no external libs)
+Performance: medium (canvas draw per frame; grid size scales with container)
+Mobile: yes (but large containers increase draw cost)
+
+Installation: None
+Usage: <LetterGlitch glitchSpeed={50} centerVignette={true} outerVignette={false} smooth={true} />
+Container: Give the parent a fixed/explicit size (e.g., style={{ width:'100%', height:'600px', position:'relative' }}); dark background recommended for contrast

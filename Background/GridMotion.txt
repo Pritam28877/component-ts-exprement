@@ -1,0 +1,17 @@
+Component: GridMotion
+Category: background/hero/gallery/layout
+
+Visual: A large, tilted (≈‑15°) 4×7 card grid (≈150vw × 150vh) with image/text tiles; dark cards with rounded corners and optional image fills.
+Behavior: Rows shift horizontally in response to mouse X with alternating directions and eased inertia (GSAP ticker). Continuous parallax-style motion.
+
+Good for: hero sections, showcase/grids, visual galleries
+Avoid for: text-heavy reading sections, form pages, accessibility-critical content (motion sensitivity)
+Website types: creative portfolios, SaaS/landing pages, studios/events
+
+Dependencies: gsap
+Performance: medium (GPU-friendly transforms; image loads can increase cost)
+Mobile: no (mouse-only by default; add touch/tilt/autoplay for mobile)
+
+Installation: npm install gsap
+Usage: <GridMotion items={items} gradientColor="black" />
+Container: Parent must have explicit size (e.g., full-viewport section). Example: a wrapper with width: 100%; height: 100vh (or any fixed height).

@@ -1,0 +1,17 @@
+Component: Orb
+Category: hero
+
+Visual: A glowing, semi‑transparent, noise‑driven energy orb that fills its container; soft gradients with hue shift and bloom-like edges
+Behavior: Smooth time-based shader animation; intensifies & ripples on hover; optional continuous rotation while hovered; hue adjustable via prop
+
+Good for: hero headers, feature callouts, interstitial/section breaks
+Avoid for: text-heavy content areas, forms, dense dashboards
+Website types: SaaS landing pages, creative portfolios, gaming/esports
+
+Dependencies: react, ogl (WebGL)
+Performance: medium
+Mobile: yes (watch older devices)
+
+Installation: npm install ogl
+Usage: <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
+Container: Parent must have explicit width & height (e.g., style={{ width:'100%', height:'600px', position:'relative' }}); canvas is transparent so it can sit over backgrounds
