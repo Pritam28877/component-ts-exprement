@@ -1,0 +1,17 @@
+Component: AnimatedContent
+Category: interaction
+
+Visual: Wraps any element; starts offset (x/y), slightly scaled and faded; animates into place at full size and opacity. Size matches its child content.
+Behavior: One-time scroll-reveal using GSAP ScrollTrigger; moves from offset to 0 on the chosen axis, scales to 1, and fades in with configurable easing, duration, delay, and threshold.
+
+Good for: hero sub-elements, feature cards/grids, stats/metrics blocks
+Avoid for: primary navbar (LCP/CLS risk), critical form inputs above the fold, continuously looping galleries
+Website types: SaaS/tech, e‑commerce, portfolios
+
+Dependencies: react, gsap, gsap/ScrollTrigger
+Performance: medium
+Mobile: yes
+
+Installation: npm install gsap
+Usage: <AnimatedContent distance={150} direction="horizontal" reverse={false} duration={1.2} ease="bounce.out" initialOpacity={0.2} animateOpacity scale={1.1} threshold={0.2} delay={0.3}><div>Content to Animate</div></AnimatedContent>
+Container: Ensure the wrapper isn’t clipped (avoid overflow: hidden on ancestor unless intentional); add CSS like `will-change: transform, opacity;` on the child for smoother rendering; no special positioning required.

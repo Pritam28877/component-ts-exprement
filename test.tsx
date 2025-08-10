@@ -1,147 +1,119 @@
 ## INPUT DATA:
-**Installation:** npm install motion
+**Installation:** npm install gsap
   
 **Usage:** 
 
 
-import CountUp from './CountUp'
+import AnimatedContent from './AnimatedContent'
 
-<CountUp
-  from={0}
-  to={100}
-  separator=","
-  direction="up"
-  duration={1}
-  className="count-up-text"
-/>
+<AnimatedContent
+  distance={150}
+  direction="horizontal"
+  reverse={false}
+  duration={1.2}
+  ease="bounce.out"
+  initialOpacity={0.2}
+  animateOpacity
+  scale={1.1}
+  threshold={0.2}
+  delay={0.3}
+>
+  <div>Content to Animate</div>
+</AnimatedContent>
+
+**Code:**
 
 
-**Code:** 
+import React, { useRef, useEffect, ReactNode } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { useEffect, useRef } from "react";
-import { useInView, useMotionValue, useSpring } from "motion/react";
+gsap.registerPlugin(ScrollTrigger);
 
-interface CountUpProps {
-  to: number;
-  from?: number;
-  direction?: "up" | "down";
-  delay?: number;
+interface AnimatedContentProps {
+  children: ReactNode;
+  distance?: number;
+  direction?: "vertical" | "horizontal";
+  reverse?: boolean;
   duration?: number;
-  className?: string;
-  startWhen?: boolean;
-  separator?: string;
-  onStart?: () => void;
-  onEnd?: () => void;
+  ease?: string | ((progress: number) => number);
+  initialOpacity?: number;
+  animateOpacity?: boolean;
+  scale?: number;
+  threshold?: number;
+  delay?: number;
+  onComplete?: () => void;
 }
 
-export default function CountUp({
-  to,
-  from = 0,
-  direction = "up",
+const AnimatedContent: React.FC<AnimatedContentProps> = ({
+  children,
+  distance = 100,
+  direction = "vertical",
+  reverse = false,
+  duration = 0.8,
+  ease = "power3.out",
+  initialOpacity = 0,
+  animateOpacity = true,
+  scale = 1,
+  threshold = 0.1,
   delay = 0,
-  duration = 2,
-  className = "",
-  startWhen = true,
-  separator = "",
-  onStart,
-  onEnd,
-}: CountUpProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const motionValue = useMotionValue(direction === "down" ? to : from);
-
-  const damping = 20 + 40 * (1 / duration);
-  const stiffness = 100 * (1 / duration);
-
-  const springValue = useSpring(motionValue, {
-    damping,
-    stiffness,
-  });
-
-  const isInView = useInView(ref, { once: true, margin: "0px" });
-
-  // Get number of decimal places in a number
-  const getDecimalPlaces = (num: number): number => {
-    const str = num.toString();
-    if (str.includes(".")) {
-      const decimals = str.split(".")[1];
-      if (parseInt(decimals) !== 0) {
-        return decimals.length;
-      }
-    }
-    return 0;
-  };
-
-  const maxDecimals = Math.max(getDecimalPlaces(from), getDecimalPlaces(to));
+  onComplete,
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.textContent = String(direction === "down" ? to : from);
-    }
-  }, [from, to, direction]);
+    const el = ref.current;
+    if (!el) return;
 
-  useEffect(() => {
-    if (isInView && startWhen) {
-      if (typeof onStart === "function") {
-        onStart();
-      }
+    const axis = direction === "horizontal" ? "x" : "y";
+    const offset = reverse ? -distance : distance;
+    const startPct = (1 - threshold) * 100;
 
-      const timeoutId = setTimeout(() => {
-        motionValue.set(direction === "down" ? from : to);
-      }, delay * 1000);
-
-      const durationTimeoutId = setTimeout(
-        () => {
-          if (typeof onEnd === "function") {
-            onEnd();
-          }
-        },
-        delay * 1000 + duration * 1000
-      );
-
-      return () => {
-        clearTimeout(timeoutId);
-        clearTimeout(durationTimeoutId);
-      };
-    }
-  }, [
-    isInView,
-    startWhen,
-    motionValue,
-    direction,
-    from,
-    to,
-    delay,
-    onStart,
-    onEnd,
-    duration,
-  ]);
-
-  useEffect(() => {
-    const unsubscribe = springValue.on("change", (latest) => {
-      if (ref.current) {
-        const hasDecimals = maxDecimals > 0;
-
-        const options: Intl.NumberFormatOptions = {
-          useGrouping: !!separator,
-          minimumFractionDigits: hasDecimals ? maxDecimals : 0,
-          maximumFractionDigits: hasDecimals ? maxDecimals : 0,
-        };
-
-        const formattedNumber = Intl.NumberFormat("en-US", options).format(
-          latest
-        );
-
-        ref.current.textContent = separator
-          ? formattedNumber.replace(/,/g, separator)
-          : formattedNumber;
-      }
+    gsap.set(el, {
+      [axis]: offset,
+      scale,
+      opacity: animateOpacity ? initialOpacity : 1,
     });
 
-    return () => unsubscribe();
-  }, [springValue, separator, maxDecimals]);
+    gsap.to(el, {
+      [axis]: 0,
+      scale: 1,
+      opacity: 1,
+      duration,
+      ease,
+      delay,
+      onComplete,
+      scrollTrigger: {
+        trigger: el,
+        start: `top ${startPct}%`,
+        toggleActions: "play none none none",
+        once: true,
+      },
+    });
 
-  return <span className={className} ref={ref} />;
-}
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      gsap.killTweensOf(el);
+    };
+  }, [
+    distance,
+    direction,
+    reverse,
+    duration,
+    ease,
+    initialOpacity,
+    animateOpacity,
+    scale,
+    threshold,
+    delay,
+    onComplete,
+  ]);
+
+  return <div ref={ref}>{children}</div>;
+};
+
+export default AnimatedContent;
+
 
 
 
