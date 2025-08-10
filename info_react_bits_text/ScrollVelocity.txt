@@ -1,0 +1,18 @@
+Component: ScrollVelocity
+Category: text\_animation / interaction / hero
+
+Visual: Wide marquee-style rows of bold text sliding horizontally. Multiple copies loop seamlessly; adjacent rows alternate directions for a kinetic “counter‑scroll” vibe. Defaults to large display type (≈ 4xl–5rem).
+Behavior: Scroll speed maps to marquee velocity using motion values; faster user scroll → faster (and direction‑aware) text movement. Continuous wrap keeps the line infinite; spring smoothing (damping/stiffness) prevents jitter; supports custom velocity mapping.
+
+Good for: hero bands, section separators, promo tickers
+Avoid for: long copy blocks, pages where motion should be minimal, narrow sidebars (marquee needs width)
+
+Website types: SaaS/marketing, events, e‑commerce promos, creative portfolios
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light‑medium (GPU‑friendly transforms; work scales with number of rows and copies)
+Mobile: yes (ties to touch scroll; ensure legible sizes and spacing)
+
+Installation: npm install motion
+Usage: \<ScrollVelocity texts={\['React Bits', 'Scroll Down']} velocity={120} className="custom-scroll-text" damping={50} stiffness={400} numCopies={6} velocityMapping={{ input: \[0, 1000], output: \[0, 5] }} />
+Container: Place in a full‑width block with no horizontal clipping; each row uses `overflow-hidden` internally. For custom scrollers (e.g., a div with its own scrollbar), pass `scrollContainerRef` to that element. Adjust `numCopies` so one copy’s width < container width for seamless wrapping.

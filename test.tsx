@@ -2,110 +2,231 @@
 **Installation:** npm install motion
   
 **Usage:** 
+import { useRef } from 'react';
+import VariableProximity from './VariableProximity';
 
-import GlitchText from './GlitchText';
-  
-<GlitchText
-  speed={1}
-  enableShadows={true}
-  enableOnHover={true}
-  className='custom-class'
+const containerRef = useRef(null);
+
+<div
+ref={containerRef}
+style={{position: 'relative'}}
 >
-  React Bits
-</GlitchText>
+  <VariableProximity
+    label={'Hover me! And then star React Bits on GitHub, or else...'}
+    className={'variable-proximity-demo'}
+    fromFontVariationSettings="'wght' 400, 'opsz' 9"
+    toFontVariationSettings="'wght' 1000, 'opsz' 40"
+    containerRef={containerRef}
+    radius={100}
+    falloff='linear'
+  />
+</div>
+
+
 
 **Code:** 
 
-import { FC, CSSProperties } from "react";
 
-interface GlitchTextProps {
-  children: string;
-  speed?: number;
-  enableShadows?: boolean;
-  enableOnHover?: boolean;
-  className?: string;
+import { forwardRef, useMemo, useRef, useEffect, MutableRefObject, CSSProperties, HTMLAttributes } from "react";
+import { motion } from "motion/react";
+
+function useAnimationFrame(callback: () => void) {
+    useEffect(() => {
+        let frameId: number;
+        const loop = () => {
+            callback();
+            frameId = requestAnimationFrame(loop);
+        };
+        frameId = requestAnimationFrame(loop);
+        return () => cancelAnimationFrame(frameId);
+    }, [callback]);
 }
 
-interface CustomCSSProperties extends CSSProperties {
-  "--after-duration": string;
-  "--before-duration": string;
-  "--after-shadow": string;
-  "--before-shadow": string;
+function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>) {
+    const positionRef = useRef({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const updatePosition = (x: number, y: number) => {
+            if (containerRef?.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                positionRef.current = { x: x - rect.left, y: y - rect.top };
+            } else {
+                positionRef.current = { x, y };
+            }
+        };
+
+        const handleMouseMove = (ev: MouseEvent) => updatePosition(ev.clientX, ev.clientY);
+        const handleTouchMove = (ev: TouchEvent) => {
+            const touch = ev.touches[0];
+            updatePosition(touch.clientX, touch.clientY);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("touchmove", handleTouchMove);
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("touchmove", handleTouchMove);
+        };
+    }, [containerRef]);
+
+    return positionRef;
 }
 
-const GlitchText: FC<GlitchTextProps> = ({
-  children,
-  speed = 0.5,
-  enableShadows = true,
-  enableOnHover = false,
-  className = "",
-}) => {
-  const inlineStyles: CustomCSSProperties = {
-    "--after-duration": `${speed * 3}s`,
-    "--before-duration": `${speed * 2}s`,
-    "--after-shadow": enableShadows ? "-5px 0 red" : "none",
-    "--before-shadow": enableShadows ? "5px 0 cyan" : "none",
-  };
+interface VariableProximityProps extends HTMLAttributes<HTMLSpanElement>{
+    label: string;
+    fromFontVariationSettings: string;
+    toFontVariationSettings: string;
+    containerRef: MutableRefObject<HTMLElement | null>;
+    radius?: number;
+    falloff?: "linear" | "exponential" | "gaussian";
+    className?: string;
+    onClick?: () => void;
+    style?: CSSProperties;
+}
 
-  const baseClasses =
-    "text-white text-[clamp(2rem,10vw,8rem)] font-black relative mx-auto select-none cursor-pointer";
+const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
+    const {
+        label,
+        fromFontVariationSettings,
+        toFontVariationSettings,
+        containerRef,
+        radius = 50,
+        falloff = "linear",
+        className = "",
+        onClick,
+        style,
+        ...restProps
+    } = props;
 
-  const pseudoClasses = !enableOnHover
-    ? "after:content-[attr(data-text)] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:[text-shadow:var(--after-shadow)] after:animate-glitch-after " +
-      "before:content-[attr(data-text)] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:[text-shadow:var(--before-shadow)] before:animate-glitch-before"
-    : "after:content-[''] after:absolute after:top-0 after:left-[10px] after:text-white after:bg-[#060010] after:overflow-hidden after:[clip-path:inset(0_0_0_0)] after:opacity-0 " +
-      "before:content-[''] before:absolute before:top-0 before:left-[-10px] before:text-white before:bg-[#060010] before:overflow-hidden before:[clip-path:inset(0_0_0_0)] before:opacity-0 " +
-      "hover:after:content-[attr(data-text)] hover:after:opacity-100 hover:after:[text-shadow:var(--after-shadow)] hover:after:animate-glitch-after " +
-      "hover:before:content-[attr(data-text)] hover:before:opacity-100 hover:before:[text-shadow:var(--before-shadow)] hover:before:animate-glitch-before";
+    const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+    const interpolatedSettingsRef = useRef<string[]>([]);
+    const mousePositionRef = useMousePositionRef(containerRef);
+    const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
 
-  const combinedClasses = `${baseClasses} ${pseudoClasses} ${className}`;
+    const parsedSettings = useMemo(() => {
+        const parseSettings = (settingsStr: string) =>
+            new Map(
+                settingsStr.split(",")
+                    .map(s => s.trim())
+                    .map(s => {
+                        const [name, value] = s.split(" ");
+                        return [name.replace(/['"]/g, ""), parseFloat(value)];
+                    })
+            );
 
-  return (
-    <div style={inlineStyles} data-text={children} className={combinedClasses}>
-      {children}
-    </div>
-  );
-};
+        const fromSettings = parseSettings(fromFontVariationSettings);
+        const toSettings = parseSettings(toFontVariationSettings);
 
-export default GlitchText;
+        return Array.from(fromSettings.entries()).map(([axis, fromValue]) => ({
+            axis,
+            fromValue,
+            toValue: toSettings.get(axis) ?? fromValue,
+        }));
+    }, [fromFontVariationSettings, toFontVariationSettings]);
 
-// tailwind.config.js
-// module.exports = {
-//   theme: {
-//     extend: {
-//       keyframes: {
-//         glitch: {
-//           "0%": { "clip-path": "inset(20% 0 50% 0)" },
-//           "5%": { "clip-path": "inset(10% 0 60% 0)" },
-//           "10%": { "clip-path": "inset(15% 0 55% 0)" },
-//           "15%": { "clip-path": "inset(25% 0 35% 0)" },
-//           "20%": { "clip-path": "inset(30% 0 40% 0)" },
-//           "25%": { "clip-path": "inset(40% 0 20% 0)" },
-//           "30%": { "clip-path": "inset(10% 0 60% 0)" },
-//           "35%": { "clip-path": "inset(15% 0 55% 0)" },
-//           "40%": { "clip-path": "inset(25% 0 35% 0)" },
-//           "45%": { "clip-path": "inset(30% 0 40% 0)" },
-//           "50%": { "clip-path": "inset(20% 0 50% 0)" },
-//           "55%": { "clip-path": "inset(10% 0 60% 0)" },
-//           "60%": { "clip-path": "inset(15% 0 55% 0)" },
-//           "65%": { "clip-path": "inset(25% 0 35% 0)" },
-//           "70%": { "clip-path": "inset(30% 0 40% 0)" },
-//           "75%": { "clip-path": "inset(40% 0 20% 0)" },
-//           "80%": { "clip-path": "inset(20% 0 50% 0)" },
-//           "85%": { "clip-path": "inset(10% 0 60% 0)" },
-//           "90%": { "clip-path": "inset(15% 0 55% 0)" },
-//           "95%": { "clip-path": "inset(25% 0 35% 0)" },
-//           "100%": { "clip-path": "inset(30% 0 40% 0)" },
-//         },
-//       },
-//       animation: {
-//         "glitch-after": "glitch var(--after-duration) infinite linear alternate-reverse",
-//         "glitch-before": "glitch var(--before-duration) infinite linear alternate-reverse",
-//       },
-//     },
-//   },
-//   plugins: [],
-// };
+    const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
+        Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+
+    const calculateFalloff = (distance: number) => {
+        const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
+        switch (falloff) {
+            case "exponential": return norm ** 2;
+            case "gaussian": return Math.exp(-((distance / (radius / 2)) ** 2) / 2);
+            case "linear":
+            default: return norm;
+        }
+    };
+
+    useAnimationFrame(() => {
+        if (!containerRef?.current) return;
+        const { x, y } = mousePositionRef.current;
+        if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
+          return;
+        }
+        lastPositionRef.current = { x, y };
+        const containerRect = containerRef.current.getBoundingClientRect();
+
+        letterRefs.current.forEach((letterRef, index) => {
+            if (!letterRef) return;
+
+            const rect = letterRef.getBoundingClientRect();
+            const letterCenterX = rect.left + rect.width / 2 - containerRect.left;
+            const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
+
+            const distance = calculateDistance(
+                mousePositionRef.current.x,
+                mousePositionRef.current.y,
+                letterCenterX,
+                letterCenterY
+            );
+
+            if (distance >= radius) {
+                letterRef.style.fontVariationSettings = fromFontVariationSettings;
+                return;
+            }
+
+            const falloffValue = calculateFalloff(distance);
+            const newSettings = parsedSettings
+                .map(({ axis, fromValue, toValue }) => {
+                    const interpolatedValue = fromValue + (toValue - fromValue) * falloffValue;
+                    return `'${axis}' ${interpolatedValue}`;
+                })
+                .join(", ");
+
+            interpolatedSettingsRef.current[index] = newSettings;
+            letterRef.style.fontVariationSettings = newSettings;
+        });
+    });
+
+    const words = label.split(" ");
+    let letterIndex = 0;
+
+    return (
+        <span
+            ref={ref}
+            onClick={onClick}
+            style={{
+                display: "inline",
+                fontFamily: '"Roboto Flex", sans-serif',
+                ...style,
+            }}
+            className={className}
+            {...restProps}
+        >
+            {words.map((word, wordIndex) => (
+                <span
+                    key={wordIndex}
+                    className="inline-block whitespace-nowrap"
+                >
+                    {word.split("").map((letter) => {
+                        const currentLetterIndex = letterIndex++;
+                        return (
+                            <motion.span
+                                key={currentLetterIndex}
+                                ref={(el) => { letterRefs.current[currentLetterIndex] = el; }}
+                                style={{
+                                    display: "inline-block",
+                                    fontVariationSettings:
+                                        interpolatedSettingsRef.current[currentLetterIndex],
+                                }}
+                                aria-hidden="true"
+                            >
+                                {letter}
+                            </motion.span>
+                        );
+                    })}
+                    {wordIndex < words.length - 1 && (
+                        <span className="inline-block">&nbsp;</span>
+                    )}
+                </span>
+            ))}
+            <span className="sr-only">{label}</span>
+        </span>
+    );
+});
+
+VariableProximity.displayName = "VariableProximity";
+export default VariableProximity;
 
 
 

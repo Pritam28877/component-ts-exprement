@@ -1,0 +1,18 @@
+Component: VariableProximity
+Category: text\_animation / interaction
+
+Visual: Text rendered with a variable font (e.g., Roboto Flex) where each letter dynamically changes weight, optical size, or other axes as the cursor or touch approaches. Size is inline text; inherits font size from parent.
+Behavior: Each letter individually interpolates between two `font-variation-settings` values (`fromFontVariationSettings` → `toFontVariationSettings`) based on proximity to the pointer within a configurable radius, with linear, exponential, or Gaussian falloff. Updates in real time via `requestAnimationFrame`.
+
+Good for: hero intros, interactive call‑to‑actions, playful headings
+Avoid for: long‑form body text, performance‑critical pages with many concurrent animations, environments without variable‑font support
+
+Website types: creative portfolios, interactive landing pages, experimental marketing sites
+
+Dependencies: react, motion (Framer Motion’s `motion/react`), a variable font that exposes the referenced axes (e.g., Roboto Flex with `wght`, `opsz`)
+Performance: medium (per‑letter proximity math each frame; scales with text length)
+Mobile: yes (touch movement supported)
+
+Installation: npm install motion
+Usage: `<VariableProximity label="Hover me!" fromFontVariationSettings="'wght' 400, 'opsz' 9" toFontVariationSettings="'wght' 1000, 'opsz' 40" containerRef={containerRef} radius={100} falloff="linear" className="variable-proximity-demo" />`
+Container: Must be inside a relatively positioned parent with a `ref` passed as `containerRef`; make the container large enough to capture movement. Ensure the chosen variable font is loaded (e.g., import Roboto Flex) and supports the specified axes; provide a readable non‑variable fallback for accessibility/SSR.
