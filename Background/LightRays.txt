@@ -1,0 +1,17 @@
+Component: LightRays
+Category: background
+
+Visual: Subtle volumetric “god rays” spilling from an edge or corner (configurable), softly tinted by color; full-bleed over the section.
+Behavior: Procedural rays rendered in WebGL; origin and direction set by `raysOrigin`; animated by time with speed, spread, length; optional pulsating, noise, distortion; can ease toward mouse direction with adjustable influence; pauses when off-screen via IntersectionObserver.
+
+Good for: hero headers, CTA strips, section dividers
+Avoid for: dense text paragraphs, data tables, form-heavy pages
+Website types: creative portfolios, music/entertainment, tech/SaaS landing pages
+
+Dependencies: ogl, IntersectionObserver (native browser)
+Performance: medium (alpha canvas + per-frame shader; keep DPR ≤ 2)
+Mobile: yes
+
+Installation: npm install ogl
+Usage: <LightRays raysOrigin="top-center" raysColor="#00ffff" raysSpeed={1.5} lightSpread={0.8} rayLength={1.2} followMouse={true} mouseInfluence={0.1} noiseAmount={0.1} distortion={0.05} className="custom-rays" />
+Container: Place inside a relatively positioned block with explicit height (e.g., width:100%; height:400–800px). Component injects a full-size transparent canvas; overlay foreground content above it (higher z-index). For performance on mobile, prefer smaller heights and default `mouseInfluence` low or `followMouse={false}`.

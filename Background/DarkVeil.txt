@@ -1,0 +1,17 @@
+Component: DarkVeil
+Category: background
+
+Visual: Full-bleed canvas with a dark, shifting “digital nebula”/CRT-film veil; subtle color drift, scanlines, film grain; scales to container size.
+Behavior: Procedural fragment-shader pattern driven by time; optional hue shift, noise, scanline attenuation, and spatial warp; animates continuously, responsive to resize; no user interaction.
+
+Good for: hero backgrounds, section dividers, loading/transition backdrops
+Avoid for: dense text blocks, data tables, form-heavy sections
+Website types: gaming/esports, creative portfolios, music/entertainment, devtools/SaaS with cyber/tech branding
+
+Dependencies: ogl
+Performance: medium (can become heavy with high resolution or DPR)
+Mobile: yes
+
+Installation: npm install ogl
+Usage: <DarkVeil hueShift={0} noiseIntensity={0.05} scanlineIntensity={0.15} speed={0.5} scanlineFrequency={2.0} warpAmount={0.03} resolutionScale={1} />
+Container: Parent must be position\:relative with fixed height (e.g., 400–800px) and width:100%; canvas fills parent; place foreground content in an absolutely positioned overlay (z-index above), consider lowering resolutionScale (0.75–0.9) for mobile and keeping high-contrast text.
