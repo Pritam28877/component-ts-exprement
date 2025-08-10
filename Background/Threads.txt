@@ -1,0 +1,18 @@
+Component: Threads
+Category: background/hero
+
+Visual: A field of fine, semi-transparent “threads” (parallel lines) that weave and shimmer across the whole container; looks like flowing fiber-optic strands or silk lines.
+Behavior: Procedural GLSL lines undulate continuously; amplitude and distance control wave strength and vertical spread; optional mouse input subtly shifts phase and density near the cursor.
+
+Good for: hero backdrops, section separators, product/feature intros
+Avoid for: dense form pages, long article bodies, data-heavy dashboards
+
+Website types: tech SaaS, creative studios/portfolios, landing pages
+
+Dependencies: ogl
+Performance: medium (GPU fragment shader; scales well but avoid stacking multiple full-screen instances)
+Mobile: yes (renders); no touch interaction by default
+
+Installation: npm install ogl
+Usage: <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
+Container: Parent must have explicit width & height and position: relative (e.g., style={{ width: '100%', height: '600px', position: 'relative' }}); the WebGL canvas auto-resizes to fill the container and supports transparency over backgrounds.

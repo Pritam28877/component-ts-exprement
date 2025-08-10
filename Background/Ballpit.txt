@@ -1,0 +1,17 @@
+Component: Ballpit
+Category: background/hero/interaction
+
+Visual: Full-bleed 3D “ball pit” of glossy spheres in a box; fills its parent (e.g., 500px height)
+Behavior: Physics-driven spheres bounce, collide, and react to the cursor (raycast-controlled attractor/light); optional pause and count control in code
+
+Good for: hero sections, playful background canvases, interactive showcases
+Avoid for: text-heavy/form sections, high-contrast readability areas, performance-critical pages with many animations
+Website types: creative portfolios, product/brand landing pages, gaming/entertainment
+
+Dependencies: three, gsap
+Performance: medium (200 balls) → heavy at high counts (O(n²) collisions)
+Mobile: yes (pointer events work), but reduce count for performance
+
+Installation: npm install three gsap
+Usage: <Ballpit count={200} gravity={0.7} friction={0.8} wallBounce={0.95} followCursor={true} />
+Container: A relatively positioned block with fixed height and overflow hidden (e.g., style={{position:'relative', overflow:'hidden', minHeight:'500px', maxHeight:'500px', width:'100%'}})

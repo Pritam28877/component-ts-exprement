@@ -1,0 +1,17 @@
+Component: Waves
+Category: background/hero/interaction
+
+Visual: Full-bleed animated wireframe of parallel lines forming a flowing grid; thin strokes over a translucent/solid background. Scales to fill its parent.
+Behavior: Canvas 2D animation using Perlin noise; continuous wave motion on X/Y. Cursor/touch adds springy displacement with friction/tension. Speeds/amps, line gaps, and cursor influence are tunable via props.
+
+Good for: hero backgrounds, section separators/banners, subtle motion behind headlines
+Avoid for: dense body copy (legibility), data tables/forms, legal/compliance pages
+Website types: creative studios, SaaS/tech landing pages, fintech/web3, events/conferences
+
+Dependencies: React (no external libs)
+Performance: medium (single canvas render loop; fine on modern devices)
+Mobile: yes (touch supported)
+
+Installation: None
+Usage: Waves lineColor="#fff" backgroundColor="rgba(255, 255, 255, 0.2)" waveSpeedX={0.02} waveSpeedY={0.01} waveAmpX={40} waveAmpY={20} friction={0.9} tension={0.01} maxCursorMove={120} xGap={12} yGap={36}
+Container: Place inside a parent with explicit height and `position: relative`; component itself is `position: absolute; top:0; left:0; width:100%; height:100%` and will cover the parent. Adjust parent height (e.g., 400–800px) to control visual size.

@@ -1,0 +1,17 @@
+Component: Hyperspeed
+Category: background/hero/interaction
+
+Visual: Neon “lightspeed highway” with dual roads, central island, streaking car lights, and side light-sticks; looks like a fast sci‑fi tunnel. Best as full‑bleed, 100% width, 400–800px height.
+Behavior: Animated camera + road distortion; car light streaks move along Z; side sticks scroll; on mousedown it “boosts” (FOV widens, motion accelerates). Different distortion presets change the path curvature/vibe.
+
+Good for: hero, launch/teaser sections, interstitial backgrounds
+Avoid for: text-heavy content blocks, forms, long-read articles
+Website types: gaming/esports, music/entertainment, tech/SaaS splash pages
+
+Dependencies: three, postprocessing
+Performance: heavy
+Mobile: yes (add touchstart/touchend to mirror mouse)
+
+Installation: npm install three postprocessing
+Usage: \<Hyperspeed effectOptions={{ distortion: 'turbulentDistortion', lanesPerRoad: 3, fov: 90, fovSpeedUp: 150, speedUp: 2 }} />
+Container: Place inside a parent with explicit height and relative/overflow-hidden; the canvas fills the parent (e.g., <div style="height: 600px; position: relative; overflow: hidden">…</div>) and a dark background improves contrast.

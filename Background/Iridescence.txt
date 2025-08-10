@@ -1,0 +1,17 @@
+Component: Iridescence
+Category: background/hero
+
+Visual: Full-bleed, glossy “oil-slick”/iridescent gradient that fills its parent; smooth, flowing color interference patterns.
+Behavior: GPU fragment-shader animation driven by time; optional mouse influence warps the pattern. `speed` sets flow rate; `amplitude` scales mouse distortion; `color` multiplies/fades overall tint/intensity.
+
+Good for: hero background, section dividers/intro panels, banners
+Avoid for: dense text blocks (legibility), data tables/forms, compliance/legal pages
+Website types: creative studios, tech/startups, gaming/esports, music/fashion portfolios
+
+Dependencies: ogl
+Performance: medium (single full-screen shader pass; generally 60fps on modern devices)
+Mobile: yes (renders fine; mouse interaction not active unless adapted to touch)
+
+Installation: npm install ogl
+Usage: Iridescence color={\[1,1,1]} mouseReact={false} amplitude={0.1} speed={1.0}
+Container: Provide an explicit size; the canvas fills its parent. Example: `<div style="width:100%;height:500px;position:relative">...</div>` (any height works; responsive with parent).

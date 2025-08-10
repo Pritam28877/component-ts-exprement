@@ -1,0 +1,17 @@
+Component: GridDistortion
+Category: background/hero/interaction
+
+Visual: Full-bleed image plane with subtle, grid-based displacement; scales to fill its parent
+Behavior: Mouse velocity displaces a data-texture grid causing elastic ripples; gradually relaxes back over time
+
+Good for: hero banners, section backgrounds, media galleries
+Avoid for: text-heavy content blocks, forms, critical CTA areas (possible legibility issues)
+Website types: creative portfolios, product/brand sites, tech/SaaS landing pages
+
+Dependencies: three
+Performance: medium
+Mobile: yes (renders; add touch handlers for interaction)
+
+Installation: npm install three
+Usage: <GridDistortion imageSrc="https://picsum.photos/1920/1080?grayscale" grid={10} mouse={0.1} strength={0.15} relaxation={0.9} className="custom-class" />
+Container: A positioned block that defines size (e.g., style={{ width: '100%', height: '600px', position: 'relative', overflow: 'hidden' }})
