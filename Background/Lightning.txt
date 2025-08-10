@@ -1,0 +1,20 @@
+Component: Lightning
+Category: background/hero
+
+Visual: Full-bleed WebGL canvas with branching, electric streaks tinted by hue; scales to container (commonly full-width, 400–800px tall hero).
+Behavior: Procedural FBM shader animates crackling lightning that shimmers horizontally; speed, brightness, thickness, and offset are controllable via props.
+
+Good for: hero, section dividers, concert/event headers
+Avoid for: dense text blocks, forms/inputs, long-read articles
+
+Website types: gaming, tech/startups, music/events
+
+Dependencies: React (WebGL via browser, no extra libs)
+Performance: medium (GPU shader; \~1 draw call but continuous animation)
+Mobile: yes (falls back if WebGL unavailable; consider reducing intensity/size on low-end devices)
+
+Installation: None
+
+Usage: <Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
+
+Container: Position a relatively sized wrapper with explicit height; e.g., style={{ width: '100%', height: '600px', position: 'relative' }}. Canvas fills parent; ensure sufficient contrast for overlaid content (add backdrop blur/overlay if placing text on top).
