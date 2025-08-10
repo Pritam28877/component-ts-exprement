@@ -1,0 +1,18 @@
+Component: RippleGrid
+Category: background/hero/interaction
+
+Visual: Fine luminous grid (lines or mesh) with soft ripple distortions; can be monochrome or rainbow; fills its parent with optional vignette/glow and adjustable opacity.
+Behavior: Time-driven sine ripples emanate from center; optional mouse-triggered waves within a radius with eased influence; grid angle, density, line thickness, and color dynamically controlled via uniforms.
+
+Good for: hero sections, section dividers/backgrounds, promo banners
+Avoid for: dense form pages, legal/policy text, print views
+
+Website types: creative studios, SaaS/tech landers, gaming/music
+
+Dependencies: ogl
+Performance: light–medium (single full-screen fragment shader; tune gridSize/gridThickness/rippleIntensity)
+Mobile: yes (prefer lower rippleIntensity and disable mouseInteraction)
+
+Installation: npm install ogl
+Usage: <RippleGrid enableRainbow={false} gridColor="#ffffff" rippleIntensity={0.05} gridSize={10} gridThickness={15} mouseInteraction={true} mouseInteractionRadius={1.2} opacity={0.8} />
+Container: Place inside a sized, relatively positioned wrapper (e.g., style={{ position:'relative', height:'500px', overflow:'hidden' }}). Component appends a transparent WebGL canvas and fills the parent; layer your content above with higher z-index. Consider pointer-events\:none if purely decorative. Adjust dpr ≤ 2 for smoother mobile performance.

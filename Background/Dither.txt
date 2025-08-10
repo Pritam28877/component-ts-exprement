@@ -1,0 +1,18 @@
+Component: Dither
+Category: background/hero/interaction
+
+Visual: Pixel-dithered grayscale (or tinted) noise-waves covering the full container; retro CRT/posterized look at any size.
+Behavior: Fullscreen plane driven by FBM noise; animates with speed/frequency/amplitude controls. Optional mouse hotspot distorts waves within a radius. Postprocessing quantizes colors and pixels.
+
+Good for: hero sections, full-bleed backgrounds, interstitial banners
+Avoid for: dense text blocks, legal/policy pages, performance-critical dashboards
+
+Website types: gaming, creative studios, music/arts, retro/indie SaaS
+
+Dependencies: three, postprocessing, @react-three/fiber, @react-three/postprocessing
+Performance: medium (shader + postprocessing; tune pixelSize/colorNum for mobile)
+Mobile: yes (prefer lower waveSpeed and larger pixelSize; consider disabling mouse interaction)
+
+Installation: npm install three postprocessing @react-three/fiber @react-three/postprocessing
+Usage: <Dither waveColor={[0.5,0.5,0.5]} disableAnimation={false} enableMouseInteraction={true} mouseRadius={0.3} colorNum={4} waveAmplitude={0.3} waveFrequency={3} waveSpeed={0.05} />
+Container: Provide a sized, relatively positioned parent (e.g., style={{width:'100%',height:'600px',position:'relative'}}). Component fills parent via <Canvas>. For page-wide background, absolutely position inside a relative wrapper and place content above (z-index).

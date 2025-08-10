@@ -1,0 +1,18 @@
+Component: Galaxy
+Category: background/hero
+
+Visual: Dense, glowing starfield/galaxy with subtle color shifts; fills its parent (transparent option to overlay UI).
+Behavior: GPU shader animates layers of stars with auto-rotation, twinkling, optional mouse parallax/repulsion; props control density, hue, glow, speed.
+
+Good for: hero sections, full-bleed backgrounds, banners
+Avoid for: long text-heavy forms, legal/policy pages, print views
+
+Website types: gaming, creative studios, SaaS landing pages, sci‑fi/tech brands
+
+Dependencies: ogl
+Performance: medium (fragment-shader heavy; tune density/glow for mobile)
+Mobile: yes (prefer lower density/speed; mouse interaction auto-idles)
+
+Installation: npm install ogl
+Usage: <Galaxy mouseRepulsion={true} mouseInteraction={true} density={1.2} glowIntensity={0.4} saturation={0.6} hueShift={220} twinkleIntensity={0.3} rotationSpeed={0.1} transparent={true} />
+Container: Provide a sized container (e.g., style={{width:'100%',height:'600px',position:'relative'}}). For a page background, absolutely position inside a relative parent (top:0; left:0; width:100%; height:100%; z-index behind content). Set pointer-events\:none if not interactive. Adjust density≤1.0 and glowIntensity≤0.5 on mobile for smooth 60fps.
