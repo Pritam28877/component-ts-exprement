@@ -1,0 +1,17 @@
+Component: MetallicPaint
+Category: hero/background/interaction
+
+Visual: A glossy, liquid‑metal logo mask with shifting chrome-like stripes and subtle color dispersion; reads as a premium metallic sheen. Typically fills its container (internally renders to a high‑DPI \~1000×1000 canvas).
+Behavior: WebGL2 fragment shader animates reflective bands, refraction, and “liquid” wobble over time; the logo acts as a mask (white background outside, metallic inside). Speed, edge falloff, refraction, blur, and stripe scale are parameterized.
+
+Good for: hero logo lockups, brand reveal sections, premium product banners
+Avoid for: dense text blocks, low-contrast content areas, battery‑sensitive pages
+Website types: luxury/automotive/fashion, AI/fintech SaaS, creative portfolios
+
+Dependencies: none (runs on WebGL2 in-browser; React component)
+Performance: medium–heavy (GPU shader; depends on device/GPU)
+Mobile: yes (requires WebGL2 support; consider lower speed/liquid on low‑end devices)
+
+Installation: None
+Usage: \<MetallicPaint imageData={imageData} params={{ edge: 2, patternBlur: 0.005, patternScale: 2, refraction: 0.015, speed: 0.3, liquid: 0.07 }} />
+Container: Wrap in a block with explicit size (e.g., width: 100%; height: 60–100vh). The canvas is square and high‑DPI; ensure the SVG/logo has padding and black fill to expose the effect. Use parseLogoImage(file) to convert SVG/PNG to ImageData before passing to the component.

@@ -1,0 +1,17 @@
+Component: Cubes
+Category: background/hero/interaction
+
+Visual: A 2D grid of cube “faces” (square tiles) with borders; tiles tilt in 3D around the cursor and flash as ripples. Typically fills a square area (\~400–700px) inside its parent.
+Behavior: Pointer movement tilts nearby tiles toward/away based on distance (radius, maxAngle, easing). Optional idle auto-animate sweeps a simulated cursor. Click creates concentric color ripples; tiles reset on pointer leave.
+
+Good for: hero backgrounds, section intros, interactive brand moments
+Avoid for: text-heavy content blocks, form pages, data tables
+Website types: creative studios, AI/tech SaaS, gaming/entertainment
+
+Dependencies: gsap
+Performance: medium (heavier with larger gridSize, shadows, frequent ripples)
+Mobile: yes (pointer/touch supported; consider smaller gridSize on low-end devices)
+
+Installation: npm install gsap
+Usage: <Cubes gridSize={8} maxAngle={60} radius={4} borderStyle="2px dashed #5227FF" faceColor="#1a1a2e" rippleColor="#ff6b6b" rippleSpeed={1.5} autoAnimate={true} rippleOnClick={true} />
+Container: Place inside a relatively positioned parent with a defined height; component renders a square area. Defaults to a square with class "w-1/2 aspect-square"—override via your CSS if you need full-width or a fixed pixel size.

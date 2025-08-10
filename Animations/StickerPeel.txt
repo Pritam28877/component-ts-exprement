@@ -1,0 +1,17 @@
+Component: StickerPeel
+Category: interaction
+
+Visual: A draggable “sticker” image with realistic peel‑back effect, glossy lighting highlights, and a soft drop shadow. Default width \~200px; rotates by `rotate` and can sit at any position on the screen.
+Behavior: On hover/press, the top edge peels back by a set percentage; on active/drag it peels further. Follows the pointer with dynamic specular lighting. Draggable within its parent; rotation eases back after drag.
+
+Good for: playful logo badges, promo/feature stickers, portfolio brand marks
+Avoid for: dense text blocks, mission‑critical CTAs (discoverability), very large hero images (SVG filter cost)
+Website types: creative/portfolio, e‑commerce/marketing, events/landing pages
+
+Dependencies: react, gsap, gsap/Draggable
+Performance: medium (SVG filters + drag; tune peel/filters for low‑end devices)
+Mobile: yes (touch supported; adds touch state)
+
+Installation: npm install gsap
+Usage: \<StickerPeel imageSrc={logo} width={200} rotate={30} peelBackHoverPct={20} peelBackActivePct={40} shadowIntensity={0.6} lightingIntensity={0.1} initialPosition={{ x: -100, y: 100 }} />
+Container: The component is absolutely positioned and draggable within its *immediate parent’s* bounds—ensure the parent is positioned (e.g., `relative`) and large enough. Avoid heavy overlapping filters and `overflow: hidden` unless intentional (peel/shadow). Consider a `prefers-reduced-motion` fallback and provide a transparent‑background PNG for best “sticker” look.

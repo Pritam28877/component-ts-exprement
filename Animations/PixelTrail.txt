@@ -1,0 +1,18 @@
+Component: PixelTrail
+Category: background/hero/interaction
+
+Visual: Full-bleed pixel grid where dots “light up” in your cursor/touch path; looks like a soft, gooey trail of white pixels. Scales to fill the container (typically 500–800px tall hero/backdrop).
+Behavior: Pointer/touch movement writes into a trail texture; grid cells sample it and fade out over time. Optional SVG “gooey” filter blends dots for a liquid effect.
+
+Good for: hero backgrounds, section dividers, interactive canvases
+Avoid for: dense text blocks, form-heavy sections, long lists/tables
+Website types: creative studios, tech SaaS, gaming/esports, portfolios
+
+Dependencies: three, @react-three/fiber, @react-three/drei
+Performance: medium (can become heavy with large gridSize or strong goo filter)
+Mobile: yes (touch supported; consider reducing gridSize/maxAge on low-end devices)
+
+Installation: npm install three @react-three/fiber @react-three/drei
+Usage: \<PixelTrail gridSize={50} trailSize={0.1} maxAge={250} interpolate={5} color="#fff" gooeyFilter={{ id: "custom-goo-filter", strength: 2 }} />
+
+Container: Parent must be position: relative; fixed height; overflow: hidden (e.g., \<div style={{ height: 500, position: 'relative', overflow: 'hidden' }} />). The Canvas is absolutely positioned; ensure it sits behind content (z-index) or wrap it in its own layer if you need overlays.
