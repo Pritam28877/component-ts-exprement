@@ -2,231 +2,147 @@
 **Installation:** npm install motion
   
 **Usage:** 
-import { useRef } from 'react';
-import VariableProximity from './VariableProximity';
 
-const containerRef = useRef(null);
 
-<div
-ref={containerRef}
-style={{position: 'relative'}}
->
-  <VariableProximity
-    label={'Hover me! And then star React Bits on GitHub, or else...'}
-    className={'variable-proximity-demo'}
-    fromFontVariationSettings="'wght' 400, 'opsz' 9"
-    toFontVariationSettings="'wght' 1000, 'opsz' 40"
-    containerRef={containerRef}
-    radius={100}
-    falloff='linear'
-  />
-</div>
+import CountUp from './CountUp'
 
+<CountUp
+  from={0}
+  to={100}
+  separator=","
+  direction="up"
+  duration={1}
+  className="count-up-text"
+/>
 
 
 **Code:** 
 
+import { useEffect, useRef } from "react";
+import { useInView, useMotionValue, useSpring } from "motion/react";
 
-import { forwardRef, useMemo, useRef, useEffect, MutableRefObject, CSSProperties, HTMLAttributes } from "react";
-import { motion } from "motion/react";
-
-function useAnimationFrame(callback: () => void) {
-    useEffect(() => {
-        let frameId: number;
-        const loop = () => {
-            callback();
-            frameId = requestAnimationFrame(loop);
-        };
-        frameId = requestAnimationFrame(loop);
-        return () => cancelAnimationFrame(frameId);
-    }, [callback]);
+interface CountUpProps {
+  to: number;
+  from?: number;
+  direction?: "up" | "down";
+  delay?: number;
+  duration?: number;
+  className?: string;
+  startWhen?: boolean;
+  separator?: string;
+  onStart?: () => void;
+  onEnd?: () => void;
 }
 
-function useMousePositionRef(containerRef: MutableRefObject<HTMLElement | null>) {
-    const positionRef = useRef({ x: 0, y: 0 });
+export default function CountUp({
+  to,
+  from = 0,
+  direction = "up",
+  delay = 0,
+  duration = 2,
+  className = "",
+  startWhen = true,
+  separator = "",
+  onStart,
+  onEnd,
+}: CountUpProps) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionValue = useMotionValue(direction === "down" ? to : from);
 
-    useEffect(() => {
-        const updatePosition = (x: number, y: number) => {
-            if (containerRef?.current) {
-                const rect = containerRef.current.getBoundingClientRect();
-                positionRef.current = { x: x - rect.left, y: y - rect.top };
-            } else {
-                positionRef.current = { x, y };
-            }
+  const damping = 20 + 40 * (1 / duration);
+  const stiffness = 100 * (1 / duration);
+
+  const springValue = useSpring(motionValue, {
+    damping,
+    stiffness,
+  });
+
+  const isInView = useInView(ref, { once: true, margin: "0px" });
+
+  // Get number of decimal places in a number
+  const getDecimalPlaces = (num: number): number => {
+    const str = num.toString();
+    if (str.includes(".")) {
+      const decimals = str.split(".")[1];
+      if (parseInt(decimals) !== 0) {
+        return decimals.length;
+      }
+    }
+    return 0;
+  };
+
+  const maxDecimals = Math.max(getDecimalPlaces(from), getDecimalPlaces(to));
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.textContent = String(direction === "down" ? to : from);
+    }
+  }, [from, to, direction]);
+
+  useEffect(() => {
+    if (isInView && startWhen) {
+      if (typeof onStart === "function") {
+        onStart();
+      }
+
+      const timeoutId = setTimeout(() => {
+        motionValue.set(direction === "down" ? from : to);
+      }, delay * 1000);
+
+      const durationTimeoutId = setTimeout(
+        () => {
+          if (typeof onEnd === "function") {
+            onEnd();
+          }
+        },
+        delay * 1000 + duration * 1000
+      );
+
+      return () => {
+        clearTimeout(timeoutId);
+        clearTimeout(durationTimeoutId);
+      };
+    }
+  }, [
+    isInView,
+    startWhen,
+    motionValue,
+    direction,
+    from,
+    to,
+    delay,
+    onStart,
+    onEnd,
+    duration,
+  ]);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      if (ref.current) {
+        const hasDecimals = maxDecimals > 0;
+
+        const options: Intl.NumberFormatOptions = {
+          useGrouping: !!separator,
+          minimumFractionDigits: hasDecimals ? maxDecimals : 0,
+          maximumFractionDigits: hasDecimals ? maxDecimals : 0,
         };
 
-        const handleMouseMove = (ev: MouseEvent) => updatePosition(ev.clientX, ev.clientY);
-        const handleTouchMove = (ev: TouchEvent) => {
-            const touch = ev.touches[0];
-            updatePosition(touch.clientX, touch.clientY);
-        };
+        const formattedNumber = Intl.NumberFormat("en-US", options).format(
+          latest
+        );
 
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("touchmove", handleTouchMove);
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("touchmove", handleTouchMove);
-        };
-    }, [containerRef]);
-
-    return positionRef;
-}
-
-interface VariableProximityProps extends HTMLAttributes<HTMLSpanElement>{
-    label: string;
-    fromFontVariationSettings: string;
-    toFontVariationSettings: string;
-    containerRef: MutableRefObject<HTMLElement | null>;
-    radius?: number;
-    falloff?: "linear" | "exponential" | "gaussian";
-    className?: string;
-    onClick?: () => void;
-    style?: CSSProperties;
-}
-
-const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
-    const {
-        label,
-        fromFontVariationSettings,
-        toFontVariationSettings,
-        containerRef,
-        radius = 50,
-        falloff = "linear",
-        className = "",
-        onClick,
-        style,
-        ...restProps
-    } = props;
-
-    const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
-    const interpolatedSettingsRef = useRef<string[]>([]);
-    const mousePositionRef = useMousePositionRef(containerRef);
-    const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
-
-    const parsedSettings = useMemo(() => {
-        const parseSettings = (settingsStr: string) =>
-            new Map(
-                settingsStr.split(",")
-                    .map(s => s.trim())
-                    .map(s => {
-                        const [name, value] = s.split(" ");
-                        return [name.replace(/['"]/g, ""), parseFloat(value)];
-                    })
-            );
-
-        const fromSettings = parseSettings(fromFontVariationSettings);
-        const toSettings = parseSettings(toFontVariationSettings);
-
-        return Array.from(fromSettings.entries()).map(([axis, fromValue]) => ({
-            axis,
-            fromValue,
-            toValue: toSettings.get(axis) ?? fromValue,
-        }));
-    }, [fromFontVariationSettings, toFontVariationSettings]);
-
-    const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
-        Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-
-    const calculateFalloff = (distance: number) => {
-        const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
-        switch (falloff) {
-            case "exponential": return norm ** 2;
-            case "gaussian": return Math.exp(-((distance / (radius / 2)) ** 2) / 2);
-            case "linear":
-            default: return norm;
-        }
-    };
-
-    useAnimationFrame(() => {
-        if (!containerRef?.current) return;
-        const { x, y } = mousePositionRef.current;
-        if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
-          return;
-        }
-        lastPositionRef.current = { x, y };
-        const containerRect = containerRef.current.getBoundingClientRect();
-
-        letterRefs.current.forEach((letterRef, index) => {
-            if (!letterRef) return;
-
-            const rect = letterRef.getBoundingClientRect();
-            const letterCenterX = rect.left + rect.width / 2 - containerRect.left;
-            const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
-
-            const distance = calculateDistance(
-                mousePositionRef.current.x,
-                mousePositionRef.current.y,
-                letterCenterX,
-                letterCenterY
-            );
-
-            if (distance >= radius) {
-                letterRef.style.fontVariationSettings = fromFontVariationSettings;
-                return;
-            }
-
-            const falloffValue = calculateFalloff(distance);
-            const newSettings = parsedSettings
-                .map(({ axis, fromValue, toValue }) => {
-                    const interpolatedValue = fromValue + (toValue - fromValue) * falloffValue;
-                    return `'${axis}' ${interpolatedValue}`;
-                })
-                .join(", ");
-
-            interpolatedSettingsRef.current[index] = newSettings;
-            letterRef.style.fontVariationSettings = newSettings;
-        });
+        ref.current.textContent = separator
+          ? formattedNumber.replace(/,/g, separator)
+          : formattedNumber;
+      }
     });
 
-    const words = label.split(" ");
-    let letterIndex = 0;
+    return () => unsubscribe();
+  }, [springValue, separator, maxDecimals]);
 
-    return (
-        <span
-            ref={ref}
-            onClick={onClick}
-            style={{
-                display: "inline",
-                fontFamily: '"Roboto Flex", sans-serif',
-                ...style,
-            }}
-            className={className}
-            {...restProps}
-        >
-            {words.map((word, wordIndex) => (
-                <span
-                    key={wordIndex}
-                    className="inline-block whitespace-nowrap"
-                >
-                    {word.split("").map((letter) => {
-                        const currentLetterIndex = letterIndex++;
-                        return (
-                            <motion.span
-                                key={currentLetterIndex}
-                                ref={(el) => { letterRefs.current[currentLetterIndex] = el; }}
-                                style={{
-                                    display: "inline-block",
-                                    fontVariationSettings:
-                                        interpolatedSettingsRef.current[currentLetterIndex],
-                                }}
-                                aria-hidden="true"
-                            >
-                                {letter}
-                            </motion.span>
-                        );
-                    })}
-                    {wordIndex < words.length - 1 && (
-                        <span className="inline-block">&nbsp;</span>
-                    )}
-                </span>
-            ))}
-            <span className="sr-only">{label}</span>
-        </span>
-    );
-});
+  return <span className={className} ref={ref} />;
+}
 
-VariableProximity.displayName = "VariableProximity";
-export default VariableProximity;
 
 
 

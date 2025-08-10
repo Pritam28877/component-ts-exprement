@@ -1,0 +1,18 @@
+Component: CountUp
+Category: text\_animation / interaction
+
+Visual: Numeric value that smoothly animates from a start to an end (e.g., 0 → 100) using a springy tick-up effect. Looks like a standard text/heading; size comes from your CSS.
+Behavior: Begins when the element enters the viewport (once) and `startWhen` is true. Uses motion values + spring to interpolate numbers; supports up/down direction, delay, custom duration (affects spring damping/stiffness), thousands separators, and fixed decimals based on `from`/`to`.
+
+Good for: KPI/stat counters, pricing highlights, milestones
+Avoid for: constantly changing real-time metrics, huge ranges that would take too long at short durations, SEO-critical numbers without SSR fallback
+
+Website types: SaaS dashboards/landers, e‑commerce, portfolios, reporting pages
+
+Dependencies: react, motion (Framer Motion’s `motion/react`)
+Performance: light (single text node + spring interpolation)
+Mobile: yes (in‑view trigger works on scroll)
+
+Installation: npm install motion
+Usage: <CountUp from={0} to={100} separator="," direction="up" duration={1} className="count-up-text" startWhen />
+Container: No special layout required. Place inside any text container (e.g., <h3>, <span>) with desired typography classes. Ensure the element can enter the viewport for the in‑view trigger (or control start via `startWhen`).
