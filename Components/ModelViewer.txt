@@ -1,0 +1,15 @@
+Component: ModelViewer
+Category: hero/gallery/interaction
+
+Visual: Embedded 3D model canvas (default \~400×400) with realistic lighting, soft ground contact shadow, and optional environment reflections.
+Behavior: Loads GLB/GLTF/FBX/OBJ; auto-fit/normalize to view; mouse/touch rotation, inertial spin, optional pointer parallax and subtle hover tilt; zoom via wheel/pinch (limits configurable); optional auto-rotate and fade-in; “Take Screenshot” button exports a PNG.
+
+Good for: product demos (3D), landing-page hero visuals, documentation/model previews
+Avoid for: SEO-critical above-the-fold text, very low-end devices, pages with multiple simultaneous heavy canvases
+
+Website types: e-commerce/hardware, SaaS/dev tools with 3D assets, portfolios/3D showcases
+
+Dependencies: React, three, @react-three/fiber, @react-three/drei (plus OBJLoader/FBX via drei); *lenis not required*
+Performance: medium/heavy (WebGL rendering + shadows/environment HDR; fine for 1–2 instances)
+Mobile: yes (touch rotate/pinch supported; parallax/hover toned down)
+Container: Give explicit `width`/`height` or a sized parent; container should be `position: relative`; component sets `touch-action: pan-y pinch-zoom`; ensure sufficient contrast for the optional screenshot button overlay.

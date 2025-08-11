@@ -1,0 +1,15 @@
+Component: Folder
+Category: interaction/hero/layout
+
+Visual: 3D-ish folder icon (\~100×80 before scaling) with two flaps and up to three stacked “papers” peeking out; color-customizable and scalable via `size`.
+Behavior: Click toggles open/close; on open, papers fan out with skewed folder flaps; papers subtly follow cursor within each card and spring back on leave.
+
+Good for: feature highlights (as “files”), onboarding/tooltips, playful empty states
+Avoid for: serious/compliance pages, dense data tables, long lists where repeated motion can distract
+
+Website types: product/saas marketing, portfolios, education
+
+Dependencies: React (Tailwind classes used in example); *lenis not required*
+Performance: light (CSS transforms + small state updates)
+Mobile: yes (tap toggles open/close; no hover effects on touch)
+Container: Give parent a fixed height (e.g., 600px) and `position: relative`; component scales with `size`, base folder body is \~100×80px at `size={1}`; ensure enough space above for fanned papers.

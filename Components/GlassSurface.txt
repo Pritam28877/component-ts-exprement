@@ -1,0 +1,15 @@
+Component: GlassSurface
+Category: background/hero/layout/interaction
+
+Visual: Frosted “glass” card with rounded corners; default \~200×80 but can be any width/height.
+Behavior: Uses SVG filter + backdrop-filter to create blur, brightness, chromatic aberration, and edge glow; displacement/RGB offsets and blend mode are customizable; auto-recomputes on resize and adapts to dark/light mode.
+
+Good for: hero callouts, stat/feature cards, CTA panels
+Avoid for: dense body text, low-contrast backgrounds, long scroll lists
+
+Website types: SaaS landing pages, dashboards/fintech, portfolios
+
+Dependencies: React (no extra libs). *Install step shown (lenis) isn’t required.*
+Performance: light-to-medium (SVG/backdrop filters; fine for most cards)
+Mobile: yes (has fallbacks for Safari/Firefox/backdrop-filter unsupported cases)
+Container: Give an explicit size via props or parent CSS; component fills its box and inherits border-radius; keep some background behind it for the glass effect to read.

@@ -1,0 +1,14 @@
+Component: Masonry
+Category: gallery/layout/interaction
+
+Visual: Responsive masonry grid of image tiles with variable heights; items are absolutely positioned with gaps, rounded corners, and soft shadows; fills available width and grows vertically.
+Behavior: Preloads images, then animates items into place with GSAP (from top/bottom/left/right/center/random); smooth reflow on resize; optional blur-to-focus entrance; optional hover scale and color overlay; clickable tiles open links.
+
+Good for: portfolios, photo galleries, inspiration boards
+Avoid for: text-heavy listings, strict row/column grids that require alignment, low-GPU devices with massive image counts
+Website types: creative studios, blogs/magazines, e-commerce lookbooks
+
+Dependencies: react, gsap, (optional: lenis for smooth page scroll)
+Performance: medium (animation + many images; scales with item count)
+Mobile: yes (column count adapts via media queries)
+Container: a relatively positioned, full-width container with explicit height or content-driven height; ensure adequate vertical space and consider lazy-loading for long grids

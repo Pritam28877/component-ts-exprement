@@ -1,0 +1,15 @@
+Component: CircularGallery
+Category: gallery
+
+Visual: Horizontally looping image strip that curves into a subtle arc (“circular” bend) with rounded-corner tiles and caption text below each; typically fills parent width and \~500–700px height.
+Behavior: Drag or wheel to scroll; inertial easing with snap-to-item; items curve along an arc (bend control), subtly wobble based on scroll speed, and seamlessly wrap for infinite scrolling; captions render as textures beneath each tile.
+
+Good for: hero galleries, case study carousels, featured product/media rows
+Avoid for: dense thumbnails with pagination, text-heavy content, accessibility-critical galleries without alt/keyboard support
+
+Website types: creative portfolios, SaaS/landing pages, media/entertainment
+
+Dependencies: react, ogl
+Performance: medium-to-heavy (WebGL planes, per-frame shaders and transforms)
+Mobile: yes (drag supported; consider reducing bend/segments for low-end devices)
+Container: parent must be relatively positioned with a fixed height (e.g., 600px) and overflow hidden; component canvas fills 100% of the container; provide adequate horizontal padding if overlay UI sits near edges.

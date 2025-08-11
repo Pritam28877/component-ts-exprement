@@ -1,0 +1,15 @@
+Component: MagicBento
+Category: interaction
+
+Visual: A responsive bento-style grid of glossy, dark cards with neon edge glow and floating star particles; typically full-width grid with card tiles \~220–320px tall.
+Behavior: Global mouse-driven spotlight brightens nearby cards; each card supports tilt and subtle “magnet” drift to cursor, optional click ripple, and star particles that animate on hover; text can auto-dim on idle/hover for emphasis.
+
+Good for: hero feature grid, product highlights, capability/benefit tiles
+Avoid for: dense forms, long prose/SEO sections, strictly low-motion pages
+
+Website types: SaaS/landing pages, creative studios/portfolios, tech/product marketing
+
+Dependencies: react, gsap, MagicBento.css
+Performance: medium-to-heavy (multiple per-frame transforms, particles, spotlight blend)
+Mobile: yes (auto-reduces/disable animations under \~768px)
+Container: place inside a full-width section with relative positioning; ensure the grid container uses the provided classes (`bento-section`, `card-grid`) and each card has `position: relative; overflow: hidden;`; allow sufficient padding so the fixed spotlight and glow aren’t clipped.

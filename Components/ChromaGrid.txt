@@ -1,0 +1,15 @@
+Component: ChromaGrid
+Category: gallery/interaction/hero
+
+Visual: A grid of profile/image cards (≈300px wide each) with vibrant per-card gradients and rounded corners; a circular “spotlight” mask follows the pointer across the whole grid.
+Behavior: Pointer-tracked radial mask desaturates/darkens outside the spotlight; cards react to local mouse position with a soft highlight and fade overlay; grid recenters spotlight with GSAP easing/damping and fades back when the pointer leaves.
+
+Good for: team sections, testimonial/stories galleries, creator/directories
+Avoid for: dense product catalogs needing strict accessibility contrast, text-heavy lists, pages targeting very low-end devices
+
+Website types: SaaS/portfolio, agencies/studios, communities/directories
+
+Dependencies: React, gsap (*lenis not required for this component*)
+Performance: medium (pointer tracking + GSAP tweens + backdrop/mask effects; fine up to a few dozen cards)
+Mobile: yes (spotlight centers/fades; hover accent is minimal—consider tap-to-focus if needed)
+Container: Give the parent a fixed height (e.g., 600px) and `position: relative`; component fills width/height and uses CSS variables `--x/--y/--r`; backdrop-filter/mask effects look best over a busy background and may fall back on Firefox/Safari.

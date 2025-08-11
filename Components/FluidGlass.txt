@@ -1,0 +1,14 @@
+Component: FluidGlass
+Category: hero/gallery/interaction/navigation
+
+Visual: A 3D glass-like object (lens, bar, or cube) that refracts and distorts the background scene, with embedded scrollable images and optional navigation text; large, immersive full-viewport visual.
+Behavior: Smooth scroll-driven animations; object follows pointer (lens/cube) or stays fixed at bottom (bar); refracts live background via transmission material; images zoom in/out on scroll; optional nav items react to clicks and hover.
+
+Good for: immersive hero sections, interactive portfolios, high-end product showcases
+Avoid for: text-heavy articles, minimal/static layouts, performance-critical mobile-first pages
+Website types: creative agencies, tech startups, 3D/VR product sites
+
+Dependencies: three, @react-three/fiber, @react-three/drei, maath, lenis
+Performance: heavy
+Mobile: yes (responsive scaling), but GPU-heavy
+Container: full-width/full-height parent container (e.g., `height: 100vh`, `position: relative`) for proper 3D rendering and scroll interaction

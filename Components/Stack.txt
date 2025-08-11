@@ -1,0 +1,15 @@
+Component: Stack
+Category: gallery/interaction
+
+Visual: A small stack of square “polaroid” cards (default \~200×200) with white borders and rounded corners, slightly fanned/rotated.
+Behavior: Each card tilts with pointer movement, can be dragged; if the drag offset exceeds `sensitivity`, that card animates to the back of the stack. Optional click-to-back and slight random rotation per card. Smooth spring transitions.
+
+Good for: hero gallery teasers, product shots, portfolio thumbnails, moodboards
+Avoid for: long-form text sections, dense data tables, image-critical pages needing precise order/labels
+
+Website types: creative portfolios, studio/agency sites, ecommerce lookbooks
+
+Dependencies: react, motion (Framer’s `motion/react`), (optional) Tailwind CSS for utility classes
+Performance: medium (GPU transforms + multiple images; keep image sizes optimized)
+Mobile: yes (drag works on touch; consider larger `cardDimensions` for small screens)
+Container: a relatively positioned wrapper with fixed width/height; perspective applied on the container. Ensure the container is at least `cardDimensions` and not overflow-clipped unless desired.

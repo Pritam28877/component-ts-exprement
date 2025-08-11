@@ -1,0 +1,15 @@
+Component: AnimatedList
+Category: interaction
+
+Visual: Vertical scrollable list with softly animated items; typical height 300–600px within a fixed-width container
+Behavior: Each item scales/fades in when in view; keyboard navigation (↑/↓/Tab/Shift+Tab) moves selection and autoscrolls into view; Enter triggers onItemSelect; optional top/bottom gradient hints; click/hover updates selection
+
+Good for: feature menus, docs sidebars, FAQs/toc lists
+Avoid for: dense data tables, infinite feeds, critical forms
+
+Website types: SaaS dashboards, portfolios, docs/knowledge bases
+
+Dependencies: react, motion (Motion One), AnimatedList.css
+Performance: light (short Motion One animations; minimal DOM work)
+Mobile: yes (tap to select; consider larger hit areas)
+Container: parent should set explicit height and width; use position: relative; list container scrolls (overflow-y: auto); enable/disable scrollbar via class; ensure sufficient padding/margin for gradients and autoscroll buffer

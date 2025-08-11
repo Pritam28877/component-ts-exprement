@@ -1,0 +1,15 @@
+Component: ScrollStack
+Category: interaction
+
+Visual: A vertical stack of large rounded “cards” (e.g., 100% width × \~320px height each) that compress and layer as you scroll; subtle depth, shadows, and optional blur on lower cards.
+Behavior: Smooth scrolling via Lenis; each card pins near a stack position, scales down by index, offsets downward (stacking), optional per-card rotation/blur; autocalculates transforms on scroll; fires onStackComplete when the last card reaches the stack window.
+
+Good for: feature highlights, step-by-step walkthroughs, product/story timelines
+Avoid for: long-form text articles, dense data tables, critical form flows
+
+Website types: SaaS landing pages, portfolios/case studies, editorial storytelling
+
+Dependencies: react, lenis
+Performance: medium (per-frame transforms; smooth scroll loop)
+Mobile: yes (touch scrolling supported; consider reducing blur/rotation and spacing)
+Container: parent must set an explicit height (e.g., h-screen or fixed px) and position: relative; component provides its own vertical scroll (overflow-y: auto) with inner padding (top \~20vh, bottom spacer) — ensure enough bottom space so the last pin releases cleanly.

@@ -1,0 +1,14 @@
+Component: TiltedCard
+Category: interaction/gallery
+
+Visual: A 3D tilt-hover image card with optional overlay content and tooltip; typically small to medium size (e.g., 300×300px) with smooth scaling on hover.
+Behavior: Tilts in response to mouse movement, scales up slightly on hover, displays an animated tooltip following the cursor, and can show overlay content with depth via `translateZ`.
+
+Good for: product previews, album covers, portfolio thumbnails
+Avoid for: text-heavy blocks, static imagery without interaction needs, performance-sensitive mobile-first grids
+Website types: e-commerce, music/entertainment, creative portfolios
+
+Dependencies: motion/react (Framer Motion), lenis
+Performance: medium
+Mobile: no (desktop-optimized, mobile warning option)
+Container: fixed-size or responsive container with `perspective` and centered flex layout; should match `containerHeight`/`containerWidth` to image size for best effect
