@@ -1,0 +1,14 @@
+Component: RollingGallery
+Category: gallery
+
+Visual: A 3D cylindrical carousel of image cards (approx 300×120px each) arranged in a ring, viewed with perspective; default container height \~500px, full-width.
+Behavior: Infinite linear spin when `autoplay` is true (20s per revolution), draggable on X to rotate, optional pause on hover (`pauseOnHover`), responsive cylinder width (≈1800px desktop / 1100px small screens), smooth GPU 3D transforms.
+
+Good for: hero showcases, portfolio galleries, brand/logo reels
+Avoid for: text-heavy content, accessibility-critical image grids, SEO-focused image lists needing plain markup
+Website types: creative agency, fashion/ecommerce lookbooks, product/SaaS marketing
+
+Dependencies: react, motion/react (Framer Motion)
+Performance: medium
+Mobile: yes (drag to rotate; reduced cylinder width)
+Container: parent should be `position: relative`, `height: ~500px`, `overflow: hidden`; component applies `perspective:1000px` and uses Tailwind utility classes (or equivalent CSS).

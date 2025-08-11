@@ -1,0 +1,14 @@
+Component: BounceCards
+Category: gallery/interaction/hero
+
+Visual: A tight stack of 4–6 square photo cards (200px each) fanned out with slight rotation and horizontal offsets inside a framed area (default 400×400, customizable).
+Behavior: Cards scale in from 0 to 1 with a staggered elastic bounce. Optional hover mode pushes non-hovered cards sideways while straightening the hovered card; transforms and spacing are fully controllable via props.
+
+Good for: hero image stack, featured gallery, team/client logos
+Avoid for: dense content grids, text-heavy sections, long-scrolling lists
+Website types: portfolios, product landing pages, creative studios
+
+Dependencies: react, gsap
+Performance: medium
+Mobile: yes (animation works; hover interactions typically off unless explicitly enabled)
+Container: parent must be relatively positioned; set explicit width/height (e.g., containerWidth/containerHeight). Each card is absolutely positioned and 200px square; ensure enough space to accommodate transform offsets.

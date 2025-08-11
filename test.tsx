@@ -2,250 +2,200 @@
 **Installation:** 
 **Usage:** 
 
-import ElasticSlider from './ElasticSlider'
-  
-<ElasticSlider
-  leftIcon={<>...your icon...</>}
-  rightIcon={<>...your icon...</>}
-  startingValue={500}
-  defaultValue={750}
-  maxValue={1000}
-  isStepped
-  stepSize={10}
+import BounceCards from './BounceCards'
+
+const images = [
+  "https://picsum.photos/400/400?grayscale",
+  "https://picsum.photos/500/500?grayscale",
+  "https://picsum.photos/600/600?grayscale",
+  "https://picsum.photos/700/700?grayscale",
+  "https://picsum.photos/300/300?grayscale"
+];
+
+const transformStyles = [
+  "rotate(5deg) translate(-150px)",
+  "rotate(0deg) translate(-70px)",
+  "rotate(-5deg)",
+  "rotate(5deg) translate(70px)",
+  "rotate(-5deg) translate(150px)"
+];
+
+<BounceCards
+  className="custom-bounceCards"
+  images={images}
+  containerWidth={500}
+  containerHeight={250}
+  animationDelay={1}
+  animationStagger={0.08}
+  easeType="elastic.out(1, 0.5)"
+  transformStyles={transformStyles}
+  enableHover={false}
 />
-
-
 
 
 **Code:**
 
 
 
-import React, { useEffect, useRef, useState } from "react";
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useTransform,
-} from "motion/react";
+import { useEffect } from "react";
+import { gsap } from "gsap";
 
-const MAX_OVERFLOW = 50;
-
-interface ElasticSliderProps {
-  defaultValue?: number;
-  startingValue?: number;
-  maxValue?: number;
+interface BounceCardsProps {
   className?: string;
-  isStepped?: boolean;
-  stepSize?: number;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  images?: string[];
+  containerWidth?: number;
+  containerHeight?: number;
+  animationDelay?: number;
+  animationStagger?: number;
+  easeType?: string;
+  transformStyles?: string[];
+  enableHover?: boolean;
 }
 
-const ElasticSlider: React.FC<ElasticSliderProps> = ({
-  defaultValue = 50,
-  startingValue = 0,
-  maxValue = 100,
+export default function BounceCards({
   className = "",
-  isStepped = false,
-  stepSize = 1,
-  leftIcon = <>-</>,
-  rightIcon = <>+</>,
-}) => {
+  images = [],
+  containerWidth = 400,
+  containerHeight = 400,
+  animationDelay = 0.5,
+  animationStagger = 0.06,
+  easeType = "elastic.out(1, 0.8)",
+  transformStyles = [
+    "rotate(10deg) translate(-170px)",
+    "rotate(5deg) translate(-85px)",
+    "rotate(-3deg)",
+    "rotate(-10deg) translate(85px)",
+    "rotate(2deg) translate(170px)",
+  ],
+  enableHover = false,
+}: BounceCardsProps) {
+  useEffect(() => {
+    gsap.fromTo(
+      ".card",
+      { scale: 0 },
+      {
+        scale: 1,
+        stagger: animationStagger,
+        ease: easeType,
+        delay: animationDelay,
+      }
+    );
+  }, [animationDelay, animationStagger, easeType]);
+
+  const getNoRotationTransform = (transformStr: string): string => {
+    const hasRotate = /rotate\([\s\S]*?\)/.test(transformStr);
+    if (hasRotate) {
+      return transformStr.replace(/rotate\([\s\S]*?\)/, "rotate(0deg)");
+    } else if (transformStr === "none") {
+      return "rotate(0deg)";
+    } else {
+      return `${transformStr} rotate(0deg)`;
+    }
+  };
+
+  const getPushedTransform = (
+    baseTransform: string,
+    offsetX: number
+  ): string => {
+    const translateRegex = /translate\(([-0-9.]+)px\)/;
+    const match = baseTransform.match(translateRegex);
+    if (match) {
+      const currentX = parseFloat(match[1]);
+      const newX = currentX + offsetX;
+      return baseTransform.replace(translateRegex, `translate(${newX}px)`);
+    } else {
+      return baseTransform === "none"
+        ? `translate(${offsetX}px)`
+        : `${baseTransform} translate(${offsetX}px)`;
+    }
+  };
+
+  const pushSiblings = (hoveredIdx: number) => {
+    if (!enableHover) return;
+
+    images.forEach((_, i) => {
+      const selector = `.card-${i}`;
+      gsap.killTweensOf(selector);
+
+      const baseTransform = transformStyles[i] || "none";
+
+      if (i === hoveredIdx) {
+        const noRotation = getNoRotationTransform(baseTransform);
+        gsap.to(selector, {
+          transform: noRotation,
+          duration: 0.4,
+          ease: "back.out(1.4)",
+          overwrite: "auto",
+        });
+      } else {
+        const offsetX = i < hoveredIdx ? -160 : 160;
+        const pushedTransform = getPushedTransform(baseTransform, offsetX);
+
+        const distance = Math.abs(hoveredIdx - i);
+        const delay = distance * 0.05;
+
+        gsap.to(selector, {
+          transform: pushedTransform,
+          duration: 0.4,
+          ease: "back.out(1.4)",
+          delay,
+          overwrite: "auto",
+        });
+      }
+    });
+  };
+
+  const resetSiblings = () => {
+    if (!enableHover) return;
+
+    images.forEach((_, i) => {
+      const selector = `.card-${i}`;
+      gsap.killTweensOf(selector);
+
+      const baseTransform = transformStyles[i] || "none";
+      gsap.to(selector, {
+        transform: baseTransform,
+        duration: 0.4,
+        ease: "back.out(1.4)",
+        overwrite: "auto",
+      });
+    });
+  };
+
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-4 w-48 ${className}`}
+      className={`relative flex items-center justify-center ${className}`}
+      style={{
+        width: containerWidth,
+        height: containerHeight,
+      }}
     >
-      <Slider
-        defaultValue={defaultValue}
-        startingValue={startingValue}
-        maxValue={maxValue}
-        isStepped={isStepped}
-        stepSize={stepSize}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
-      />
+      {images.map((src, idx) => (
+        <div
+          key={idx}
+          className={`card card-${idx} absolute w-[200px] aspect-square border-8 border-white rounded-[30px] overflow-hidden`}
+          style={{
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+            transform: transformStyles[idx] || "none",
+          }}
+          onMouseEnter={() => pushSiblings(idx)}
+          onMouseLeave={resetSiblings}
+        >
+          <img
+            className="w-full h-full object-cover"
+            src={src}
+            alt={`card-${idx}`}
+          />
+        </div>
+      ))}
     </div>
   );
-};
-
-interface SliderProps {
-  defaultValue: number;
-  startingValue: number;
-  maxValue: number;
-  isStepped: boolean;
-  stepSize: number;
-  leftIcon: React.ReactNode;
-  rightIcon: React.ReactNode;
 }
 
-const Slider: React.FC<SliderProps> = ({
-  defaultValue,
-  startingValue,
-  maxValue,
-  isStepped,
-  stepSize,
-  leftIcon,
-  rightIcon,
-}) => {
-  const [value, setValue] = useState<number>(defaultValue);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const [region, setRegion] = useState<"left" | "middle" | "right">("middle");
-  const clientX = useMotionValue(0);
-  const overflow = useMotionValue(0);
-  const scale = useMotionValue(1);
 
-  useEffect(() => {
-    setValue(defaultValue);
-  }, [defaultValue]);
 
-  useMotionValueEvent(clientX, "change", (latest: number) => {
-    if (sliderRef.current) {
-      const { left, right } = sliderRef.current.getBoundingClientRect();
-      let newValue: number;
-      if (latest < left) {
-        setRegion("left");
-        newValue = left - latest;
-      } else if (latest > right) {
-        setRegion("right");
-        newValue = latest - right;
-      } else {
-        setRegion("middle");
-        newValue = 0;
-      }
-      overflow.jump(decay(newValue, MAX_OVERFLOW));
-    }
-  });
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.buttons > 0 && sliderRef.current) {
-      const { left, width } = sliderRef.current.getBoundingClientRect();
-      let newValue =
-        startingValue +
-        ((e.clientX - left) / width) * (maxValue - startingValue);
-      if (isStepped) {
-        newValue = Math.round(newValue / stepSize) * stepSize;
-      }
-      newValue = Math.min(Math.max(newValue, startingValue), maxValue);
-      setValue(newValue);
-      clientX.jump(e.clientX);
-    }
-  };
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    handlePointerMove(e);
-    e.currentTarget.setPointerCapture(e.pointerId);
-  };
-
-  const handlePointerUp = () => {
-    animate(overflow, 0, { type: "spring", bounce: 0.5 });
-  };
-
-  const getRangePercentage = (): number => {
-    const totalRange = maxValue - startingValue;
-    if (totalRange === 0) return 0;
-    return ((value - startingValue) / totalRange) * 100;
-  };
-
-  return (
-    <>
-      <motion.div
-        onHoverStart={() => animate(scale, 1.2)}
-        onHoverEnd={() => animate(scale, 1)}
-        onTouchStart={() => animate(scale, 1.2)}
-        onTouchEnd={() => animate(scale, 1)}
-        style={{
-          scale,
-          opacity: useTransform(scale, [1, 1.2], [0.7, 1]),
-        }}
-        className="flex w-full touch-none select-none items-center justify-center gap-4"
-      >
-        <motion.div
-          animate={{
-            scale: region === "left" ? [1, 1.4, 1] : 1,
-            transition: { duration: 0.25 },
-          }}
-          style={{
-            x: useTransform(() =>
-              region === "left" ? -overflow.get() / scale.get() : 0
-            ),
-          }}
-        >
-          {leftIcon}
-        </motion.div>
-
-        <div
-          ref={sliderRef}
-          className="relative flex w-full max-w-xs flex-grow cursor-grab touch-none select-none items-center py-4"
-          onPointerMove={handlePointerMove}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-        >
-          <motion.div
-            style={{
-              scaleX: useTransform(() => {
-                if (sliderRef.current) {
-                  const { width } = sliderRef.current.getBoundingClientRect();
-                  return 1 + overflow.get() / width;
-                }
-                return 1;
-              }),
-              scaleY: useTransform(overflow, [0, MAX_OVERFLOW], [1, 0.8]),
-              transformOrigin: useTransform(() => {
-                if (sliderRef.current) {
-                  const { left, width } =
-                    sliderRef.current.getBoundingClientRect();
-                  return clientX.get() < left + width / 2 ? "right" : "left";
-                }
-                return "center";
-              }),
-              height: useTransform(scale, [1, 1.2], [6, 12]),
-              marginTop: useTransform(scale, [1, 1.2], [0, -3]),
-              marginBottom: useTransform(scale, [1, 1.2], [0, -3]),
-            }}
-            className="flex flex-grow"
-          >
-            <div className="relative h-full flex-grow overflow-hidden rounded-full bg-gray-400">
-              <div
-                className="absolute h-full bg-gray-500 rounded-full"
-                style={{ width: `${getRangePercentage()}%` }}
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          animate={{
-            scale: region === "right" ? [1, 1.4, 1] : 1,
-            transition: { duration: 0.25 },
-          }}
-          style={{
-            x: useTransform(() =>
-              region === "right" ? overflow.get() / scale.get() : 0
-            ),
-          }}
-        >
-          {rightIcon}
-        </motion.div>
-      </motion.div>
-      <p className="absolute text-gray-400 transform -translate-y-4 text-xs font-medium tracking-wide">
-        {Math.round(value)}
-      </p>
-    </>
-  );
-};
-
-function decay(value: number, max: number): number {
-  if (max === 0) {
-    return 0;
-  }
-  const entry = value / max;
-  const sigmoid = 2 * (1 / (1 + Math.exp(-entry)) - 0.5);
-  return sigmoid * max;
-}
-
-export default ElasticSlider;
 
 
 

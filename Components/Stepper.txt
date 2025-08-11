@@ -1,0 +1,14 @@
+Component: Stepper
+Category: interaction
+
+Visual: Horizontal step indicators (numbered circles with connecting line) above a card-sized content area; default max width \~md (≈28–32rem) and responsive center layout.
+Behavior: Animates step changes with sliding transitions; supports clicking indicators to jump, Back/Next controls, and a final “Complete” state; calls `onStepChange` and `onFinalStepCompleted` callbacks.
+
+Good for: multi-step forms, onboarding wizards, checkout flows
+Avoid for: single-field quick actions, very long forms without logical grouping, content where step order isn’t linear
+Website types: SaaS dashboards, e-commerce, education/course platforms
+
+Dependencies: react, motion/react (Framer Motion)
+Performance: light
+Mobile: yes
+Container: place within a centered container; allow width up to \~max-w-md; ensure sufficient vertical space; component uses Tailwind-like classes but can be styled via provided className props.

@@ -1,0 +1,15 @@
+Component: InfiniteMenu
+Category: navigation/gallery/interaction
+
+Visual: A 3D sphere of image-discs arranged in space; fills its parent (e.g., 600px-tall area) with overlaid title/description and a floating CTA button
+Behavior: Click-drag/touch-drag to rotate the sphere; nearest front-facing disc becomes “active,” fading in its title/description and enabling a CTA; images are packed in a GPU atlas and smoothly scale with depth
+
+Good for: feature menus, portfolio/project selectors, category hubs
+Avoid for: text-heavy menus, SEO-critical nav links, very large item counts (>50) without pagination
+
+Website types: creative studios, product/landing pages, galleries/portfolios
+
+Dependencies: react, gl-matrix, WebGL2 (via canvas)
+Performance: heavy (GPU/WebGL instancing + image atlas)
+Mobile: yes (touch drag; modern devices recommended)
+Container: parent must be positioned and sized (e.g., `position: relative; height: 600px;`); canvas stretches to `width: 100%; height: 100%`; ensure sufficient z-index for overlayed title/CTA and allow pointer events over canvas
