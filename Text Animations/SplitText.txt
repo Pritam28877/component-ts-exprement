@@ -12,6 +12,4 @@ Dependencies: react, gsap, gsap/ScrollTrigger, gsap/SplitText
 Performance: light–medium (staggered transforms/opacity on multiple nodes)
 Mobile: yes (scroll-triggered, touch-safe)
 
-Installation: npm install gsap
-Usage: \<SplitText text="Hello, GSAP!" className="text-2xl font-semibold text-center" delay={100} duration={0.6} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-100px" textAlign="center" onLetterAnimationComplete={() => console.log('All letters have animated!')} />
 Container: Inline-block text element with overflow-hidden; parent can be any layout, but ensure sufficient viewport space for ScrollTrigger (e.g., not inside overflow-hidden ancestors that clip scroll); for splitType="lines", the element becomes position\:relative to support absolute line wrapping.

@@ -11,7 +11,4 @@ Website types: gaming/esports, music/entertainment, tech/SaaS splash pages
 Dependencies: three, postprocessing
 Performance: heavy
 Mobile: yes (add touchstart/touchend to mirror mouse)
-
-Installation: npm install three postprocessing
-Usage: \<Hyperspeed effectOptions={{ distortion: 'turbulentDistortion', lanesPerRoad: 3, fov: 90, fovSpeedUp: 150, speedUp: 2 }} />
 Container: Place inside a parent with explicit height and relative/overflow-hidden; the canvas fills the parent (e.g., <div style="height: 600px; position: relative; overflow: hidden">…</div>) and a dark background improves contrast.

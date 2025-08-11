@@ -11,7 +11,4 @@ Website types: creative portfolios, game/entertainment, experimental marketing
 Dependencies: react, HTML Canvas API (uses document.fonts when available)
 Performance: medium (continuous rAF redraw across text height)
 Mobile: yes (touch hover region supported; passive false on touchmove)
-
-Installation: None
-Usage: <FuzzyText baseIntensity={0.2} hoverIntensity={0.5} enableHover={true}>404</FuzzyText>
 Container: The component is a <canvas>; give it space via parent layout (e.g., center with flex/grid). It auto-sizes to text; adjust overall size with the `fontSize` prop or scale via CSS (e.g., max-width). Ensure high contrast background for visibility and avoid overlaying heavy filters that could blur the effect.

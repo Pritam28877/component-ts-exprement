@@ -13,6 +13,4 @@ Dependencies: react, motion (Framer Motion’s `motion/react`)
 Performance: light (DOM + CSS transforms; scales with `maxPoints`)
 Mobile: yes (works on touch via container-relative moves, but effect is minimal without a cursor)
 
-Installation: npm install motion
-Usage: <TextCursor text="Hello!" delay={0.01} spacing={80} followMouseDirection randomFloat exitDuration={0.3} removalInterval={20} maxPoints={10} />
 Container: A relatively positioned wrapper with explicit size (e.g., className="relative w-full h-\[300px] overflow-hidden"). The component renders absolutely positioned trail items inside; keep `pointer-events: none` on the overlay to avoid blocking UI.

@@ -11,7 +11,5 @@ Website types: SaaS marketing, portfolios/creative, e‑commerce product cards
 Dependencies: react
 Performance: light
 Mobile: no (mouse-only; no touch handlers)
-
-Installation: None
-Usage: <Magnet padding={50} disabled={false} magnetStrength={50} activeTransition="transform 0.25s ease-out" inactiveTransition="transform 0.45s ease">Star React Bits on GitHub!</Magnet>
 Container: Renders an inline-block wrapper (position: relative). Ensure there’s visual room around the element for the offset; avoid clipping parents (overflow: hidden) unless intended. Consider adding a `prefers-reduced-motion` gate if used widely.
+

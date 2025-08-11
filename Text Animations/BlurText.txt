@@ -11,7 +11,6 @@ Website types: SaaS marketing, portfolios/creative, editorial landing pages
 Dependencies: react, motion (motion/react), motion-utils (for easing types), optional tailwindcss for styling classes
 Performance: light/medium (GPU transforms + blur filter per segment; fine for typical headings)
 Mobile: yes
-
-Installation: npm install motion
-Usage: \<BlurText text="Isn't this so cool?!" delay={150} animateBy="words" direction="top" threshold={0.1} rootMargin="0px" stepDuration={0.35} onAnimationComplete={() => {}} className="text-2xl mb-8" />
 Container: Place inside a text container with adequate line-height; the component sets `display:flex` and `flex-wrap` on the paragraph, so allow horizontal space for wrapping. Avoid heavy parent transforms/filters that could compound blur. Keep background contrast high so the blur-to-crisp transition reads clearly.
+
+

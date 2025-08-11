@@ -1,0 +1,15 @@
+Component: LiquidChrome
+Category: background
+
+Visual: Full-bleed liquid metal/chrome waves with glossy shading; fills its container (e.g., 100% width × \~400–800px height)
+Behavior: Shader-based ripples and sine-wave distortions that flow over time; optional mouse/touch interaction adds localized ripples and parallax-like warping
+
+Good for: hero, section transitions, feature highlights
+Avoid for: long text blocks, dense forms, low-power pages
+
+Website types: creative studios, SaaS/landing pages, media/entertainment
+
+Dependencies: react, ogl
+Performance: medium-to-heavy (fragment shader with iterative warping and 3×3 sampling)
+Mobile: yes (recommend disabling interaction or lowering amplitude/speed on small screens)
+Container: parent must set explicit width/height and position (e.g., relative; 100% width × fixed/min height); canvas is appended to the container and resizes with it

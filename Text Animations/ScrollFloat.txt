@@ -12,7 +12,4 @@ Website types: product/marketing pages, creative portfolios, SaaS landers
 Dependencies: react, gsap, gsap/ScrollTrigger
 Performance: light (per‑char transforms/opacities; scrubbed scrolltrigger)
 Mobile: yes (works on touch scroll; consider larger stagger/duration for readability)
-
-Installation: npm install gsap
-Usage: <ScrollFloat animationDuration={1} ease="back.inOut(2)" scrollStart="center bottom+=50%" scrollEnd="bottom bottom-=40%" stagger={0.03}>React Bits</ScrollFloat>
 Container: Use a block wrapper with overflow-hidden (component adds it) and enough vertical space for the yPercent entry; for custom scroll containers, pass scrollContainerRef pointing to the scrollable element.

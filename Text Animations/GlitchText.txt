@@ -12,7 +12,5 @@ Website types: creative portfolios, esports/gaming, cyberpunk/tech brands
 Dependencies: react, tailwindcss (with custom keyframes)
 Performance: light (CSS animations; no JS per frame)
 Mobile: yes (works), but hover-only mode won’t trigger on touch
-
-Installation: npm install -D tailwindcss postcss autoprefixer
-Usage: <GlitchText speed={1} enableShadows enableOnHover className="custom-class">React Bits</GlitchText>
 Container: No special sizing required; place on a dark background for best contrast. Ensure Tailwind config includes the provided `glitch` keyframes and `glitch-before/after` animations, and that the component’s element isn’t clipped by parent `overflow:hidden` unless intended.
+

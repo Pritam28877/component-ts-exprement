@@ -11,7 +11,4 @@ Website types: tech, creative/agency, gaming/entertainment
 Dependencies: react, three, @react-three/fiber, @react-three/drei
 Performance: medium
 Mobile: yes
-
-Installation: npm install three @react-three/fiber @react-three/drei
-Usage: <Beams beamWidth={2} beamHeight={15} beamNumber={12} lightColor="#ffffff" speed={2} noiseIntensity={1.75} scale={0.2} rotation={0} />
 Container: Parent must have explicit height (e.g., height: 600px) and relative positioning; full-width works best; avoid overlaying heavy DOM above the canvas

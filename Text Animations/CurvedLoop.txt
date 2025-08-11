@@ -11,7 +11,5 @@ Website types: creative portfolios, marketing/landing pages, event or product la
 Dependencies: react (SVG/TextPath APIs in browser)
 Performance: light–medium (rAF updating a single textPath offset; repeats text to fill width)
 Mobile: yes (pointer-based dragging supported)
-
-Installation: None
-Usage: <CurvedLoop marqueeText="Be ✦ Creative ✦ With ✦ React ✦ Bits ✦" speed={3} curveAmount={500} direction="right" interactive={true} className="custom-text-style" />
 Container: Works best in a wide container; component renders a full-width SVG with aspect ratio \~100:12 and large font size (text-\[6rem]). Ensure sufficient vertical space so the curve (controlled by curveAmount) isn’t clipped; avoid overflow hidden if you want full glow/shadow styles from custom classes.
+

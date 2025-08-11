@@ -13,6 +13,4 @@ Dependencies: react, motion (Framer Motion’s `motion/react`), a variable font 
 Performance: medium (per‑letter proximity math each frame; scales with text length)
 Mobile: yes (touch movement supported)
 
-Installation: npm install motion
-Usage: `<VariableProximity label="Hover me!" fromFontVariationSettings="'wght' 400, 'opsz' 9" toFontVariationSettings="'wght' 1000, 'opsz' 40" containerRef={containerRef} radius={100} falloff="linear" className="variable-proximity-demo" />`
 Container: Must be inside a relatively positioned parent with a `ref` passed as `containerRef`; make the container large enough to capture movement. Ensure the chosen variable font is loaded (e.g., import Roboto Flex) and supports the specified axes; provide a readable non‑variable fallback for accessibility/SSR.

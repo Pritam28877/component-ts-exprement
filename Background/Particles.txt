@@ -1,0 +1,16 @@
+Component: Particles
+Category: background/hero/interaction
+
+Visual: A 3D cloud of soft circular particles (points) drifting/rotating in depth; fills whatever width/height the parent provides (e.g., 600px tall).
+
+Behavior: GPU point sprites with sine-wave motion; optional hover parallax shifts the entire particle cluster; slow auto-rotation unless disabled.
+
+Good for: hero, section-backgrounds, decorative banners
+Avoid for: dense text blocks, forms, data-heavy tables
+Website types: SaaS landing, creative/agency portfolio, events/music
+
+Dependencies: react, ogl
+Performance: medium (GPU accelerated; hundreds of particles OK)
+Mobile: yes
+
+Container: Place inside a parent with explicit size and position: relative (e.g., style={{width:'100%', height:'600px', position:'relative'}}). The canvas is transparent; ensure underlying background as needed.

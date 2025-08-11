@@ -11,7 +11,5 @@ Website types: creative/portfolio, tech/SaaS, gaming/entertainment
 Dependencies: react
 Performance: light (grid updates via style transform; cost scales with rows×columns)
 Mobile: yes (pointer events supported on modern mobile)
-
-Installation: None
-Usage: <MagnetLines rows={9} columns={9} containerSize="60vmin" lineColor="tomato" lineWidth="0.8vmin" lineHeight="5vmin" baseAngle={0} />
 Container: Component renders a square CSS grid with explicit width/height (`containerSize`); keep it in a relatively spacious area, avoid heavy overlapping filters, and consider `prefers-reduced-motion` handling if used full-screen.
+

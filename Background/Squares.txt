@@ -11,7 +11,5 @@ Website types: SaaS landing pages, creative portfolios, product marketing sites
 Dependencies: React, CSS
 Performance: light
 Mobile: yes
-
-Installation: npm install gsap
-Usage: <Squares speed={0.5} squareSize={40} direction="diagonal" borderColor="#fff" hoverFillColor="#222" />
 Container: Give the canvas a sized parent (e.g., min-height or fixed height) and let it stretch to 100% width/height; example: a relative container with height: 400–600px and overflow: hidden
+

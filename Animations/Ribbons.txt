@@ -11,8 +11,6 @@ Website types: creative/agency, tech/SaaS, gaming/entertainment
 Dependencies: ogl (Renderer, Transform, Vec3, Color, Polyline)
 Performance: medium (GPU/WebGL; fine on modern devices, keep pointCount/colors modest)
 Mobile: yes (touch-supported; consider reducing pointCount/thickness for low-end devices)
-
-Installation: npm install ogl
-Usage: \<Ribbons baseThickness={30} colors={\['#ffffff']} speedMultiplier={0.5} maxAge={500} enableFade={false} enableShaderEffect={true} />
-
 Container: A relatively positioned block with explicit height; canvas is absolutely positioned to cover it. Recommended: style={{ height: '500px', position: 'relative', overflow: 'hidden' }}.
+
+

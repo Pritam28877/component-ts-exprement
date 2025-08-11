@@ -11,7 +11,5 @@ Website types: creative portfolios, SaaS marketing, event/brand sites
 Dependencies: react, motion (motion/react)
 Performance: light–medium (many absolutely positioned spans + continuous rotation)
 Mobile: yes (hover effects won’t trigger; spin runs at baseline)
-
-Installation: npm install motion
-Usage: <CircularText text="REACT*BITS*COMPONENTS*" onHover="speedUp" spinDuration={20} className="custom-class" />
 Container: The component renders a relative, rounded, 200×200 container; keep it square for symmetry. Ensure enough padding/contrast around it; avoid heavy parent transforms that may jitter continuous rotation.
+

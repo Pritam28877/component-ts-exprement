@@ -12,7 +12,5 @@ Website types: tech SaaS, creative studios/portfolios, landing pages
 Dependencies: ogl
 Performance: medium (GPU fragment shader; scales well but avoid stacking multiple full-screen instances)
 Mobile: yes (renders); no touch interaction by default
-
-Installation: npm install ogl
-Usage: <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
 Container: Parent must have explicit width & height and position: relative (e.g., style={{ width: '100%', height: '600px', position: 'relative' }}); the WebGL canvas auto-resizes to fill the container and supports transparency over backgrounds.
+

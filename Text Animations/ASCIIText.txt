@@ -12,7 +12,5 @@ Website types: creative portfolios, code/art labs, gaming/e‑sports, music/fest
 Dependencies: react, three
 Performance: medium‑heavy (WebGL + ASCII post-process each frame; scales with container size and `asciiFontSize`)
 Mobile: yes (touch tilt works), but consider smaller text/plane heights and lower frame budgets on mid/low-end devices
-
-Installation: npm install three
-Usage: <ASCIIText text="hello_world" asciiFontSize={8} textFontSize={200} textColor="#fdf9f3" planeBaseHeight={8} enableWaves />
 Container: Place inside a sized parent (e.g., className="relative w-full h-\[400px]")—component uses an absolutely positioned canvas/pre overlay that fills 100%. Client-side only (disable SSR or dynamic import) and consider an accessible text fallback (e.g., visually hidden heading).
+

@@ -11,7 +11,4 @@ Website types: creative agencies, fashion/e-commerce, art/photography portfolios
 Dependencies: gsap
 Performance: medium–heavy (depends on variant complexity and image count)
 Mobile: yes (touch events supported; high animation load may affect low-end devices)
-
-Installation: npm install gsap
-Usage: `<ImageTrail items={['img1.jpg','img2.jpg']} variant={3} />`
 Container: Must be inside a relatively positioned element with fixed height and `overflow: hidden` (or `overflow: visible` for animations exceeding bounds). Each image is absolutely positioned and sized at \~190px wide by default; adjust styles as needed for larger or smaller trails.

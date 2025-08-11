@@ -13,6 +13,4 @@ Dependencies: react, gsap, gsap/ScrollTrigger
 Performance: light (per‑word opacity/filter, one container rotate; scrubbed)
 Mobile: yes (scroll‑based; tune blur/opacity for clarity on small screens)
 
-Installation: npm install gsap
-Usage: <ScrollReveal baseOpacity={0} enableBlur baseRotation={5} blurStrength={10} rotationEnd="bottom bottom" wordAnimationEnd="bottom bottom">Your text…</ScrollReveal>
 Container: Place inside a block wrapper with sufficient vertical space; component handles word splitting and ScrollTrigger setup. For custom scroll areas, pass `scrollContainerRef` to the scrollable element.

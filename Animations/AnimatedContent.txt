@@ -11,7 +11,4 @@ Website types: SaaS/tech, e‑commerce, portfolios
 Dependencies: react, gsap, gsap/ScrollTrigger
 Performance: medium
 Mobile: yes
-
-Installation: npm install gsap
-Usage: <AnimatedContent distance={150} direction="horizontal" reverse={false} duration={1.2} ease="bounce.out" initialOpacity={0.2} animateOpacity scale={1.1} threshold={0.2} delay={0.3}><div>Content to Animate</div></AnimatedContent>
 Container: Ensure the wrapper isn’t clipped (avoid overflow: hidden on ancestor unless intentional); add CSS like `will-change: transform, opacity;` on the child for smoother rendering; no special positioning required.

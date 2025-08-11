@@ -11,7 +11,5 @@ Website types: creative/agency, SaaS marketing, portfolios
 Dependencies: React, Tailwind CSS (custom keyframes). GSAP not required.
 Performance: light (pure CSS animations)
 Mobile: yes
-
-Installation: npm install tailwindcss postcss autoprefixer
-Usage: <StarBorder as="button" className="custom-class" color="cyan" speed="5s" thickness={1}>Buy now</StarBorder>
 Container: Renders as an inline-block, position: relative, overflow-hidden, rounded container. Ensure Tailwind has the provided keyframes (`star-movement-top`/`bottom`) and apply a visible background behind the animated bands (component includes a default dark gradient—you can override via className).
+

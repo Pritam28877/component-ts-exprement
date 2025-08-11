@@ -12,7 +12,5 @@ Website types: gaming, cyberpunk/tech brands, creative studios
 Dependencies: ogl (WebGL)
 Performance: medium (fragment shader heavy; tune digitSize/gridMul/effects)
 Mobile: yes (prefer lower timeScale, disable heavy effects like high chromaticAberration/dither)
-
-Installation: npm install ogl
-Usage: <FaultyTerminal scale={1.5} gridMul={[2,1]} digitSize={1.2} timeScale={1} pause={false} scanlineIntensity={1} glitchAmount={1} flickerAmount={1} noiseAmp={1} chromaticAberration={0} dither={0} curvature={0.2} tint="#ffffff" mouseReact={true} mouseStrength={0.5} pageLoadAnimation={true} brightness={1} />
 Container: Provide a sized, relatively positioned parent (e.g., style={{width:'100%',height:'600px',position:'relative'}}). Component appends a canvas and fills the parent; set overflow\:hidden. Place foreground content above with higher z-index; consider pointer-events\:none if purely decorative. Adjust dpr≤2 on mobile for smoothness.
+

@@ -11,7 +11,5 @@ Website types: creative portfolios, e-commerce, entertainment/media
 Dependencies: react, gsap
 Performance: medium-heavy (depends on grid size; many DOM nodes for high grids)
 Mobile: yes (click/tap toggles instead of hover)
-
-Installation: npm install gsap
-Usage: `<PixelTransition firstContent={<img ... />} secondContent={<div>...</div>} gridSize={12} pixelColor="#fff" animationStepDuration={0.4} />`
 Container: Must have fixed aspect ratio (provided via `aspectRatio` prop) and `overflow:hidden`; avoid wrapping in elements that disrupt relative positioning; size content with `width` and `max-width` as desired.
+

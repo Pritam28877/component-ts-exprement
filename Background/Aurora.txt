@@ -1,0 +1,15 @@
+Component: Aurora
+Category: background/hero
+
+Visual: Soft, translucent aurora bands with a horizontal color ramp; fills its container (full-bleed if container is full-screen).
+Behavior: Procedural GLSL noise creates flowing vertical “curtains”; speed, amplitude, blend, and color stops control motion, intensity, and softness.
+
+Good for: hero, section-backgrounds, banners
+Avoid for: text-heavy content blocks, dense forms, data tables
+Website types: SaaS landing, creative portfolio, music/events
+
+Dependencies: react, ogl
+Performance: medium (GPU shader; fine on most laptops/modern phones)
+Mobile: yes
+
+Container: Place inside a parent with explicit width/height (e.g., w-full h-\[500px] or fullscreen). The canvas is transparent; set the parent’s background as needed.

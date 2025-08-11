@@ -12,7 +12,5 @@ Website types: tech startups, cybersecurity, creative portfolios, gaming/e-sport
 Dependencies: react, motion (Framer Motion’s `motion/react`)
 Performance: light (string manipulation + simple DOM updates)
 Mobile: yes (works with touch for view-triggered animation; hover triggers won’t work on touch devices)
-
-Installation: npm install motion
-Usage: <DecryptedText text="Hover me!" speed={100} maxIterations={20} characters="ABCD1234!?" className="revealed" parentClassName="all-letters" encryptedClassName="encrypted" animateOn="view" revealDirection="center" />
 Container: Inline by default; wrap in block or flex containers for positioning. Ensure sufficient contrast between encrypted and revealed styles for clarity.
+

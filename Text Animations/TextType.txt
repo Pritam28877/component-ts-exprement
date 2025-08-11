@@ -12,6 +12,4 @@ Dependencies: react, gsap (for cursor blink), TextType.css
 Performance: light
 Mobile: yes
 
-Installation: npm install gsap
-Usage: \<TextType text={\["Text typing effect", "for your websites", "Happy coding!"]} typingSpeed={75} pauseDuration={1500} showCursor={true} cursorCharacter="|" className="text-2xl" />
 Container: Place in a block with stable line-height to minimize layout shift; keep sufficient width to avoid excessive wrapping; avoid heavy parent transforms/filters; works as any element via `as` prop (e.g., h1, p, div).

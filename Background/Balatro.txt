@@ -1,0 +1,15 @@
+Component: Balatro
+Category: background/hero/interaction
+
+Visual: Swirling, painterly vortex/ink effect with a subtle pixelated mosaic (from `pixelFilter`); fills whatever size the parent provides.
+Behavior: GLSL distortion that spins and warps colors; optional auto-rotation (`isRotate`), live speed/angle modulation from mouse (`mouseInteraction`), and tunable contrast/lighting/color ramps.
+
+Good for: hero, section backgrounds, banners
+Avoid for: dense text blocks, long-form reading, data tables/forms
+Website types: creative/agency portfolio, music/events, gaming/tech SaaS
+
+Dependencies: react, ogl
+Performance: medium–heavy (full-screen fragment shader; reduce resolution/pixelFilter/spinSpeed on low-end devices)
+Mobile: yes
+
+Container: A relatively positioned element with explicit width/height (e.g., `width:100%`, `height:500–800px`); the canvas is appended inside `.balatro-container`. Ensure sufficient overlay contrast for any foreground content.

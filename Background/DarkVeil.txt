@@ -11,7 +11,5 @@ Website types: gaming/esports, creative portfolios, music/entertainment, devtool
 Dependencies: ogl
 Performance: medium (can become heavy with high resolution or DPR)
 Mobile: yes
-
-Installation: npm install ogl
-Usage: <DarkVeil hueShift={0} noiseIntensity={0.05} scanlineIntensity={0.15} speed={0.5} scanlineFrequency={2.0} warpAmount={0.03} resolutionScale={1} />
 Container: Parent must be position\:relative with fixed height (e.g., 400–800px) and width:100%; canvas fills parent; place foreground content in an absolutely positioned overlay (z-index above), consider lowering resolutionScale (0.75–0.9) for mobile and keeping high-contrast text.
+

@@ -12,7 +12,4 @@ Website types: creative portfolios, studios/agencies, tech/art blogs
 Dependencies: react, gsap, gsap/SplitText, gsap/ScrambleTextPlugin
 Performance: light‑medium (per‑char bounds + small tweens; scales with text length)
 Mobile: yes (Pointer Events work on touch; effect triggers around the finger)
-
-Installation: npm install gsap
-Usage: <ScrambledText className="scrambled-text-demo" radius={100} duration={1.2} speed={0.5} scrambleChars=".:">Your interactive paragraph…</ScrambledText>
 Container: Place inside a readable-width wrapper (e.g., max-w-\[800px]) with sufficient padding. Use a monospace or evenly spaced font for a cleaner scramble look. Ensure foreground contrast; the component measures per‑char rects, so avoid heavy transforms on parent containers.

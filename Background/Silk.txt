@@ -11,7 +11,5 @@ Website types: luxury/ecommerce, creative portfolios, music/entertainment
 Dependencies: three, @react-three/fiber
 Performance: medium (can trend heavy at high DPR or large canvases)
 Mobile: yes
-
-Installation: npm install three @react-three/fiber
-Usage: <Silk speed={5} scale={1} color="#7B7481" noiseIntensity={1.5} rotation={0} />
 Container: Give the parent a fixed height and position: relative (e.g., width: 100%; height: 400–800px). The Canvas fills the parent; layer foreground content above it with absolute positioning and a higher z-index if needed. Lower DPR or reduce scale for mobile if performance dips.
+

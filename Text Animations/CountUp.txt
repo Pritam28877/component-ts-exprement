@@ -12,7 +12,5 @@ Website types: SaaS dashboards/landers, e‑commerce, portfolios, reporting page
 Dependencies: react, motion (Framer Motion’s `motion/react`)
 Performance: light (single text node + spring interpolation)
 Mobile: yes (in‑view trigger works on scroll)
-
-Installation: npm install motion
-Usage: <CountUp from={0} to={100} separator="," direction="up" duration={1} className="count-up-text" startWhen />
 Container: No special layout required. Place inside any text container (e.g., <h3>, <span>) with desired typography classes. Ensure the element can enter the viewport for the in‑view trigger (or control start via `startWhen`).
+

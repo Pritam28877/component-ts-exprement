@@ -11,7 +11,5 @@ Website types: creative portfolios, editorial/fashion, minimalist SaaS/landing p
 Dependencies: none
 Performance: light (very small per‑frame work; increase interval for ultra‑low CPU)
 Mobile: yes
-
-Installation: None
-Usage: `<Noise patternSize={250} patternScaleX={1} patternScaleY={1} patternRefreshInterval={2} patternAlpha={15} />`
 Container: The component renders an absolutely positioned, pointer‑events‑none canvas sized to the viewport (`h-screen w-screen`). Place inside a relatively positioned wrapper if you want it clipped to that area; otherwise it will cover the full screen. Adjust z-index if you need content above it.
+

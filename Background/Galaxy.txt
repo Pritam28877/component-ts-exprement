@@ -12,7 +12,5 @@ Website types: gaming, creative studios, SaaS landing pages, sci‑fi/tech brand
 Dependencies: ogl
 Performance: medium (fragment-shader heavy; tune density/glow for mobile)
 Mobile: yes (prefer lower density/speed; mouse interaction auto-idles)
-
-Installation: npm install ogl
-Usage: <Galaxy mouseRepulsion={true} mouseInteraction={true} density={1.2} glowIntensity={0.4} saturation={0.6} hueShift={220} twinkleIntensity={0.3} rotationSpeed={0.1} transparent={true} />
 Container: Provide a sized container (e.g., style={{width:'100%',height:'600px',position:'relative'}}). For a page background, absolutely position inside a relative parent (top:0; left:0; width:100%; height:100%; z-index behind content). Set pointer-events\:none if not interactive. Adjust density≤1.0 and glowIntensity≤0.5 on mobile for smooth 60fps.
+

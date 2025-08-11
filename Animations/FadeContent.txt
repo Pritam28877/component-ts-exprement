@@ -11,7 +11,5 @@ Website types: SaaS/tech, blogs/media, e‑commerce, portfolios
 Dependencies: react (built-in IntersectionObserver API)
 Performance: light (blur on large elements: medium)
 Mobile: yes
-
-Installation: None
-Usage: <FadeContent blur={true} duration={1000} easing="ease-out" initialOpacity={0} threshold={0.15} delay={100}>…</FadeContent>
 Container: No special layout needed; avoid ancestor styles that force extra paints (e.g., heavy backdrop-filters). For smoother rendering add `will-change: opacity, filter` on the child; ensure the element can actually intersect (not display\:none).
+

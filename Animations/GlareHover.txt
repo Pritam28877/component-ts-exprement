@@ -11,7 +11,5 @@ Website types: luxury/e‑commerce, creative/portfolio, SaaS marketing
 Dependencies: react
 Performance: light
 Mobile: limited (no touch handlers by default)
-
-Installation: None
-Usage: <GlareHover glareColor="#ffffff" glareOpacity={0.3} glareAngle={-30} glareSize={300} transitionDuration={800} playOnce={false}>…</GlareHover>
 Container: Component is self‑contained with position\:relative and overflow\:hidden; ensure a defined width/height (via props or style). Avoid heavy backdrop/filters on ancestors; content is centered with CSS grid.
+

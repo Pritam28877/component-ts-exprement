@@ -11,7 +11,4 @@ Website types: creative studios, event/microsites, experimental SaaS marketing
 Dependencies: React; a variable font that supports 'wght'/'wdth'/'ital' axes (e.g., Compressa VF); optional Tailwind for utility classes
 Performance: medium–heavy (per-letter rAF updates + layout reads; keep text short)
 Mobile: yes (touch-follow supported)
-
-Installation: None
-Usage: <TextPressure text="Hello!" flex={true} alpha={false} stroke={false} width={true} weight={true} italic={true} textColor="#ffffff" strokeColor="#ff0000" minFontSize={36} />
 Container: Place inside a relatively positioned container with explicit height (e.g., style={{ position:'relative', height:'300px' }}). Component fills width/height; avoid very long strings; ensure the loaded font URL is reachable and the chosen font family exposes the required variable axes.

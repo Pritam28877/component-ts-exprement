@@ -11,7 +11,4 @@ Website types: creative studios, tech/startups, gaming/esports, music/fashion po
 Dependencies: ogl
 Performance: medium (single full-screen shader pass; generally 60fps on modern devices)
 Mobile: yes (renders fine; mouse interaction not active unless adapted to touch)
-
-Installation: npm install ogl
-Usage: Iridescence color={\[1,1,1]} mouseReact={false} amplitude={0.1} speed={1.0}
 Container: Provide an explicit size; the canvas fills its parent. Example: `<div style="width:100%;height:500px;position:relative">...</div>` (any height works; responsive with parent).

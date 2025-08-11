@@ -11,7 +11,4 @@ Website types: creative agency, gaming/eSports, tech product landing pages
 Dependencies: gsap
 Performance: light (small DOM updates, occasional SVG filter animations)
 Mobile: no (touch devices won’t benefit without adaptation)
-
-Installation: npm install gsap
-Usage: `<Crosshair containerRef={containerRef} color="#ffffff" />`
 Container: Place inside a relatively or fixed-position container that matches the interaction bounds. If `containerRef` is omitted, defaults to tracking the whole window. Ensure `overflow: hidden` if you want to clip the crosshair lines to the container.

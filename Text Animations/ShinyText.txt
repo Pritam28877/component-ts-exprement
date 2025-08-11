@@ -11,7 +11,4 @@ Website types: ecommerce, portfolios/creative, event/marketing pages
 Dependencies: tailwindcss (with custom keyframes/animation config)
 Performance: light
 Mobile: yes
-
-Installation: None (requires Tailwind CSS with custom `shine` animation in config)
-Usage: <ShinyText text="Just some shiny text!" disabled={false} speed={3} className="custom-class" />
 Container: Inline-block element; inherits font styling from parent; ensure background contrast so the shine effect is visible; avoid wrapping in containers with overflow hidden unless intentional to crop the shine.

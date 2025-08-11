@@ -14,6 +14,4 @@ Dependencies: react, motion (Framer Motion’s `motion/react`)
 Performance: light (DOM + CSS filters + a single Motion element)
 Mobile: yes (auto mode works well; hover interactions won’t apply on touch)
 
-Installation: npm install motion
-Usage: <TrueFocus sentence="True Focus" manualMode={false} blurAmount={5} borderColor="red" glowColor="rgba(255,0,0,0.6)" animationDuration={2} pauseBetweenAnimations={1} />
 Container: A relatively positioned wrapper (e.g., className="relative flex flex-wrap items-center justify-center gap-4"). Ensure ample line height and font size for clean blur edges; the Motion focus frame is absolutely positioned inside the container.

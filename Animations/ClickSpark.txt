@@ -11,7 +11,5 @@ Website types: creative/portfolio, e‑commerce, marketing sites
 Dependencies: react (uses Canvas 2D + ResizeObserver)
 Performance: light (single canvas, per-frame draw; scales with sparkCount)
 Mobile: yes (tap works; uses click handler)
-
-Installation: None
-Usage: <ClickSpark sparkColor="#fff" sparkSize={10} sparkRadius={15} sparkCount={8} duration={400} easing="ease-out" extraScale={1.0}>…</ClickSpark>
 Container: Wrap your interactive region; parent should have concrete size (component sets `position: relative` / `absolute` canvas). Avoid pointer events on the canvas (already disabled). For large areas, consider lowering `sparkCount` or `duration`; add a `prefers-reduced-motion` gate if needed.
+
