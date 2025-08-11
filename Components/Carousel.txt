@@ -1,0 +1,16 @@
+Component: Carousel
+Category: gallery/hero/interaction
+
+Visual: A horizontal card slider with 3D tilt—each slide rotates slightly on the Y-axis while moving; supports circular “round” mode (perfect circle slides) or standard rounded rectangles. Size driven by `baseWidth` (e.g., 300px) and parent height.
+
+Behavior: Drag/swipe to move; spring-based snapping; optional autoplay with delay and pause-on-hover; optional seamless loop using a cloned last slide and instant reset; dots indicate and set the active slide.
+
+Good for: hero feature highlights, product/module overviews, testimonials
+Avoid for: long-form text, SEO-critical content that must be fully visible server-side, dense data tables
+
+Website types: SaaS marketing, portfolios, app landing pages
+
+Dependencies: react, motion/react (Framer Motion v3 API); optional react-icons, Tailwind CSS
+Performance: light–medium (GPU transforms + spring animations; content size and autoplay frequency affect cost)
+Mobile: yes (touch drag supported; dots are tap targets)
+Container: wrap in a relatively positioned container with an explicit height (e.g., 600px) and enough width; component sets its own width via `baseWidth`; ensure `overflow: hidden` for the viewport and provide bottom space for dots in “round” mode.

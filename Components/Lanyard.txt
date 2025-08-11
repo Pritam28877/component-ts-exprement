@@ -1,0 +1,15 @@
+Component: Lanyard
+Category: interaction/hero
+
+Visual: A 3D ID card clipped to a textured lanyard band, hanging in space with studio-style reflections; typically full-viewport height.
+Behavior: Real-time physics rope sim; card swings with gravity, reacts to pointer drag (grab/grabbed cursor), band deforms along a Catmull–Rom curve; subtle damping and lightformers add glints.
+
+Good for: hero sections, product/ID mockups, event or conference pages
+Avoid for: dense content pages, text-heavy article layouts, low-power landing variants
+
+Website types: tech SaaS, portfolios, events/conferences
+
+Dependencies: three, @react-three/fiber, @react-three/drei, @react-three/rapier, meshline, (assets: card.glb, lanyard.png; Vite assetsInclude for \*.glb; optional TS module decls)
+Performance: medium–heavy (WebGL + physics)
+Mobile: yes (works, but heavier; component adapts resolution on small screens)
+Container: A sized parent (e.g., full-viewport div). Canvas uses transparent background; ensure `height: 100vh` and `position: relative`.

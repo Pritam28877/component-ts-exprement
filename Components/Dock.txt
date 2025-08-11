@@ -1,0 +1,15 @@
+Component: Dock
+Category: navigation/interaction
+
+Visual: A macOS-style floating dock with circular icon buttons, centered at the bottom; typically \~64–256px tall depending on hover state.
+Behavior: Icons smoothly magnify toward the cursor using spring physics; labels fade/slide up on hover; panel height expands when dock is active and collapses when idle.
+
+Good for: app shells, dashboards, portfolios
+Avoid for: long text articles, complex forms (mobile keyboard overlap), minimal-JS landing pages
+
+Website types: SaaS/product sites, developer portfolios, web apps
+
+Dependencies: react, motion/react (Framer Motion v3 API), (optional) react-icons, (optional) Tailwind CSS for the provided classes
+Performance: light
+Mobile: yes (tap works; hover tooltips limited)
+Container: place in a full-width container; ensure bottom spacing (`bottom: .5rem`) and high z-index; if you need it relative to a section, wrap in a `position: relative` parent since the dock uses `position: absolute` and centers with `left: 50%; transform: translateX(-50%)`.

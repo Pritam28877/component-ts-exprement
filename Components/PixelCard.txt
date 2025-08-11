@@ -1,0 +1,16 @@
+Component: PixelCard
+Category: background/interaction
+
+Visual: A rounded 4:5 card with a subtle pixel-grid “sparkle” effect that blooms from the center on hover/focus; supports overlayed absolute content. Default demo size \~300×400px.
+
+Behavior: On hover/focus, tiny squares appear, shimmer, and pulse outward (canvas-driven). On leave/blur, pixels fade away. Motion respects `prefers-reduced-motion` and reflows on resize.
+
+Good for: feature highlight cards, pricing/plan tiles, portfolio project cards
+Avoid for: dense text blocks, data-heavy tables, ultra-low-power pages
+
+Website types: SaaS marketing, creative portfolios, product landing pages
+
+Dependencies: react, (optional) Tailwind CSS utilities; uses built-in ResizeObserver & Canvas API
+Performance: medium (canvas draws many small quads; tune via `gap`, `speed`, `colors`)
+Mobile: yes (focus/tap can trigger; no hover—consider `noFocus`/explicit triggers)
+Container: fixed or responsive card container with `position: relative; overflow: hidden;` and a set size/aspect; place your content inside using `position: absolute` as needed.

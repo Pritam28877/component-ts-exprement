@@ -1,0 +1,16 @@
+Component: GooeyNav
+Category: navigation/interaction
+
+Visual: Pill-style top nav where the active tab is filled by a white, “gooey” blob; when switching tabs, small glowing particles burst and flow around the active pill. Typically sits in a single row inside a \~48–64px tall bar.
+
+Behavior: Clicking a tab moves a blurred/contrast “goo” filter to that tab; particles spawn and animate along circular paths; the active label cross-fades and the white pill scales in. Keyboard (Enter/Space) activates; resizes keep the effect aligned.
+
+Good for: hero nav bars, landing-page section tabs, playful app headers
+Avoid for: strict enterprise UIs, dense sidebar navigation, low-contrast light-on-light headers
+
+Website types: creative portfolios, SaaS marketing pages, event/microsites
+
+Dependencies: react (ResizeObserver built-in on modern browsers); optional Tailwind CSS for utility classes; (no extra JS libs)
+Performance: light–medium (CSS filters + \~15 animated particles per switch)
+Mobile: yes (tap works; hover not required)
+Container: wrap in a `position: relative` parent with a set height (e.g., 600px in the example); prefer a darker background so the white goo/lighten blend is visible; full-width row with horizontal padding.
