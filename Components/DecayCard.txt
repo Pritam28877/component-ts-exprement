@@ -1,0 +1,14 @@
+Component: DecayCard
+Category: hero/gallery/interaction
+
+Visual: A poster-style card (default \~300×400) with bold text overlay; the image looks “decayed/liquid” via SVG turbulence/displacement.
+Behavior: Card subtly follows cursor (x/y/rotate) and the displacement intensity increases with mouse movement distance, creating a reactive glitch/decay effect.
+
+Good for: hero feature callouts, project/portfolio showcases, promo banners
+Avoid for: text-heavy content, strict accessibility/print contexts, performance-sensitive lists
+Website types: creative portfolios, fashion/ecommerce lookbooks, SaaS/landing pages seeking visual flair
+
+Dependencies: react, gsap
+Performance: medium (continuous rAF + SVG filter)
+Mobile: partial (renders, but interaction is desktop-only since it listens to mousemove)
+Container: parent should be position: relative; pass explicit width/height props; allow enough space for the bottom-left heading overlay; high-contrast background helps the effect pop

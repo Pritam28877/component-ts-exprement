@@ -1,0 +1,14 @@
+Component: ElasticSlider
+Category: interaction/layout
+
+Visual: Compact horizontal slider (\~12rem wide by default) with a thin rounded track, a filled progress bar, and left/right icon buttons.
+Behavior: Drag anywhere on the track to set value; overscroll past track edges produces an elastic stretch and icon “bounce.” Supports stepped increments, hover/touch scale-up, and animated return on release.
+
+Good for: numeric controls (volume/brightness), pricing/config sliders, compact settings UIs
+Avoid for: precise form inputs needing keyboard entry, very large ranges without labels, accessibility-critical controls without ARIA/keyboard support
+Website types: SaaS dashboards, media players, product configurators
+
+Dependencies: react, framer-motion (imported as motion/react)
+Performance: light–medium (motion values + rAF transforms)
+Mobile: yes (pointer/touch handled; consider larger hit areas)
+Container: place inside a flex container; default wrapper width is `w-48` (\~12rem) but can be overridden via `className`; ensure enough horizontal space for icons and track

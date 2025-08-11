@@ -1,0 +1,14 @@
+Component: FlowingMenu
+Category: navigation/interaction/layout
+
+Visual: Full-height vertical menu where each row is a large, centered label; on hover, a white panel slides in and reveals a horizontal marquee mixing the label text and a thumbnail image.
+Behavior: Direction-aware slide (from top/bottom based on cursor entry); inside panel, content continuously scrolls left via CSS keyframes; panel slides out on leave.
+
+Good for: featured category menus, section nav with previews, landing-page hero menus
+Avoid for: dense multi-level nav, small sidebars, accessibility-critical primary nav without clear focus states
+Website types: creative studios, product/OS showcase pages, editorial/magazine portals
+
+Dependencies: react, gsap, tailwindcss (custom keyframes/utility for 101% translate)
+Performance: light (simple GSAP transforms + CSS marquee)
+Mobile: yes (works visually; hover effects won’t trigger—consider tap-to-toggle for the marquee)
+Container: parent should be position: relative and sized (e.g., height: 100%/fixed like 600px); menu fills width/height; ensure Tailwind config adds `translate['101'] = '101%'` and `animation: { marquee }` for the scrolling row

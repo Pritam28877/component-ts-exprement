@@ -1,0 +1,14 @@
+Component: CardSwap
+Category: gallery/interaction/hero
+
+Visual: A small stack of skewed 3D cards (default \~500×400) overlapping, anchored to the bottom-right of its parent with perspective depth.
+Behavior: Every few seconds the front card drops down, moves to the back, and the rest shift forward with elastic easing; optional pause on hover; cards are clickable.
+
+Good for: testimonials, feature highlights, portfolio previews
+Avoid for: long-form text, accessibility-critical content, dense data cards
+Website types: SaaS marketing, creative studios, personal portfolios
+
+Dependencies: react, gsap, (tailwind classes used for styling)
+Performance: medium
+Mobile: yes (responsive transforms applied; consider fewer/smaller cards)
+Container: parent should be position: relative; give it a fixed height; component itself is absolutely positioned with 3D perspective and overflow visible

@@ -1,0 +1,15 @@
+Component: FlyingPosters
+Category: gallery/hero/interaction
+
+Visual: A vertical “tunnel” of image planes (posters) flying past the camera with a subtle flip/warp; fills the container (e.g., 600px tall) with continuously cycling images.
+Behavior: Smooth inertial scroll (wheel/drag/touch) drives the stack; each plane rotates via a vertex-shader distortion as it passes; items loop seamlessly and auto-resize on container changes.
+
+Good for: hero sections, featured galleries, mood/brand showcases
+Avoid for: text-heavy pages, accessibility-critical content blocks, low-contrast imagery on very light backgrounds
+
+Website types: creative portfolios, fashion/agency sites, SaaS marketing pages
+
+Dependencies: react, ogl (Renderer/Camera/Program/Mesh/Texture)
+Performance: medium–heavy (WebGL shaders + multiple textures; tune with `planeWidth/Height`, `distortion`, image count)
+Mobile: yes (touch drag supported; wheel disabled by default with passive handling)
+Container: a relatively positioned wrapper with explicit height (e.g., `height: 600px`) and `position: relative; overflow: hidden;`; component expands to `w-full h-full`; ensure images are CORS-enabled if loading from external URLs.

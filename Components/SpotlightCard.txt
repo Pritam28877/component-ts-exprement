@@ -1,0 +1,15 @@
+Component: SpotlightCard
+Category: background/interaction
+
+Visual: A rounded, dark card with a soft radial “spotlight” glow that follows the cursor; padding-heavy content area (default p-8), subtle border.
+Behavior: On hover, a radial-gradient spotlight appears and tracks pointer; on focus it locks in (higher opacity) and fades out on blur/leave.
+
+Good for: feature highlights, CTA tiles, pricing/plan cards
+Avoid for: dense long-form text, strict WCAG-high-contrast layouts, pages with heavy overlapping hover effects
+
+Website types: SaaS marketing, portfolios, dashboards
+
+Dependencies: react (optional Tailwind for provided classes)
+Performance: light
+Mobile: yes (focus/tap shows glow; no pointer tracking)
+Container: place inside a relatively sized section; card is self-contained with `position: relative`, `overflow: hidden`, and rounded corners—ensure sufficient padding and a background where the glow has contrast.

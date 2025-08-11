@@ -1,0 +1,14 @@
+Component: InfiniteScroll
+Category: gallery/interaction/layout
+
+Visual: A vertical column (\~30rem wide by parent height) of stacked items; can appear slightly 3D/tilted left or right.
+Behavior: Items loop infinitely in a vertical marquee; supports wheel/drag scroll with momentum, optional autoplay (up/down) and pause-on-hover, seamless wrap.
+
+Good for: testimonials or quotes, logo/name tickers, recent updates/changelog
+Avoid for: long-form copy, complex interactive cards, accessibility-critical content without alternatives
+Website types: SaaS marketing, news/magazine highlights, creative portfolios
+
+Dependencies: react, gsap, gsap/Observer
+Performance: light–medium (depends on item count/height)
+Mobile: yes (drag/touch supported; consider slower autoplay/smaller items)
+Container: parent should have a fixed/known height and position: relative; component width configurable (default 30rem); ensure overflow is visible if using tilt transforms

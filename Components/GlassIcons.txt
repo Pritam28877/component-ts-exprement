@@ -1,0 +1,14 @@
+Component: GlassIcons
+Category: navigation/interaction/layout
+
+Visual: A grid of small 3D “glass” tiles (\~4.5em square each) with colored gradient backplates and frosted fronts; label appears below on hover.
+Behavior: On hover, each tile tilts/raises in 3D (translateZ/rotate), the glass layer pops forward with blur, and the label fades/slides in; buttons are focusable/clickable.
+
+Good for: feature/category menus, app launcher grids, quick links
+Avoid for: long labels, dense mega-menus, text-heavy navigation
+Website types: SaaS dashboards, mobile apps/web apps, creative/portfolio sites
+
+Dependencies: react, tailwindcss (utility classes), react-icons (e.g., feather)
+Performance: light
+Mobile: yes (tap-friendly; labels appear on hover so consider always-visible labels on touch)
+Container: place inside a sized parent; grid auto-centers with large gaps (gap \~5em); ensure enough vertical space for hover labels below each tile; background contrast helps the glass effect
